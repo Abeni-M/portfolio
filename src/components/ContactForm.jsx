@@ -24,20 +24,14 @@ const ContactForm = () => {
     // 5. Uncomment the code below and replace the IDs
 
     try {
-      // ACTUAL CALL (Uncomment when you have your IDs):
-      /*
       const result = await emailjs.sendForm(
-        'YOUR_SERVICE_ID', 
-        'YOUR_TEMPLATE_ID', 
+        'service_0ntia54',  // Integrated from your screenshot
+        'YOUR_TEMPLATE_ID', // Still need this from EmailJS "Email Templates" tab
         formRef.current, 
-        'YOUR_PUBLIC_KEY'
+        'YOUR_PUBLIC_KEY'   // Still need this from EmailJS "Account" tab
       );
-      */
 
-      // SIMULATED CALL for demonstration:
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      console.log('Form submitted successfully');
+      console.log('Form submitted successfully', result.text);
       setStatus('success');
       toast.success('Message sent! I\'ll contact you soon.');
       formRef.current.reset();
