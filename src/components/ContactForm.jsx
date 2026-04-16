@@ -25,10 +25,10 @@ const ContactForm = () => {
 
     try {
       const result = await emailjs.sendForm(
-        'service_0ntia54',  // Integrated from your screenshot
-        'YOUR_TEMPLATE_ID', // Still need this from EmailJS "Email Templates" tab
+        'service_0ntia54', 
+        'template_tfkv1xt', 
         formRef.current, 
-        'YOUR_PUBLIC_KEY'   // Still need this from EmailJS "Account" tab
+        'aat6ziqGEqgNtDAg6' // Integrated from your newest screenshot
       );
 
       console.log('Form submitted successfully', result.text);
