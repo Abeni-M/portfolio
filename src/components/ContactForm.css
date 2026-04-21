@@ -1,149 +1,73 @@
 .contact-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .contact-card {
-  width: 100%;
-  max-width: 500px;
-  padding: 2.5rem;
-  border-radius: 24px;
-}
-
-.contact-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.contact-header h2 {
-  font-size: 2.25rem;
-  margin-bottom: 0.5rem;
-}
-
-.contact-header p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-}
-
-.email-link {
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  border-bottom: 1px solid transparent;
-}
-
-.email-link:hover {
-  color: var(--primary-hover);
-  border-bottom-color: var(--primary-hover);
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  padding: 3rem;
+  border-radius: 2rem;
+  border: 1px solid var(--border);
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.form-group label {
+.form-label {
+  display: block;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-main);
-  margin-left: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
-.form-group input,
-.form-group textarea {
-  background: rgba(255, 255, 255, 0.05);
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
   color: var(--text-main);
   font-family: inherit;
-  font-size: 1rem;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.form-input:focus, .form-textarea:focus {
   outline: none;
   border-color: var(--primary);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(99, 102, 241, 0.05);
   box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
 }
 
 .submit-btn {
-  margin-top: 1rem;
-  background: var(--primary);
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: white;
   border: none;
-  border-radius: 12px;
-  padding: 0.875rem;
-  font-size: 1rem;
+  border-radius: 0.75rem;
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 0.2s ease;
 }
 
-.submit-btn:hover {
-  background: var(--primary-hover);
-  transform: translateY(-1px);
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
 }
 
 .submit-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
-  transform: none;
 }
 
-.status-message {
-  margin-top: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  border-radius: 12px;
-  font-size: 0.925rem;
-  font-weight: 500;
-}
-
-.status-message.success {
-  background: rgba(16, 185, 129, 0.1);
-  color: var(--success);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-}
-
-.status-message.error {
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--error);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
-}
-
-/* Glassmorphism utility update if needed */
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+@media (max-width: 640px) {
+  .contact-card {
+    padding: 1.5rem;
+  }
 }
