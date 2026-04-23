@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Database, Layers, ArrowRight } from 'lucide-react';
 import kudejaImg from '../assets/kudeja-preview.png';
+import videoEditingImg from '../assets/video-editing-preview.png';
 
 import './Projects.css';
 
@@ -20,7 +21,7 @@ const Projects = () => {
       type: 'Video editing',
       tech: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
       description: 'Video editing platform',
-      image: 'src/assets/video-editing-preview.png',
+      image: videoEditingImg,
       links: { github: '#', live: '#' }
     },
 
