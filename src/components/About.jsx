@@ -1,115 +1,80 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code2, Server, Globe2, Briefcase, GraduationCap, Cpu } from 'lucide-react';
+import { Code, Database, Shield, Zap } from 'lucide-react';
 
 import './About.css';
 
 const About = () => {
-  const skills = [
-    { 
-      name: 'Software Engineering', 
-      items: ['React', 'JavaScript (ES6+)', 'Node.js', 'Python'], 
-      icon: <Cpu className="icon-blue" size={24} /> 
+  const serviceList = [
+    {
+      title: 'Full-Stack Development',
+      desc: 'End-to-end architecture using React, Node.js, and modern frameworks.',
+      icon: <Code size={24} />
     },
-    { 
-      name: 'Systems & Backend', 
-      items: ['Java', 'PHP', 'C#', 'C/C++'], 
-      icon: <Server className="icon-purple" size={24} /> 
+    {
+      title: 'Database Design',
+      desc: 'Expert PostgreSQL modeling for high-scale relational data.',
+      icon: <Database size={24} />
     },
-    { 
-      name: 'Database & Infrastructure', 
-      items: ['MySQL', 'SQL Server', 'MongoDB', 'Networking'], 
-      icon: <Code2 className="icon-green" size={24} /> 
-    },
-    { 
-      name: 'Professional Skills', 
-      items: ['IT Support', 'Network Security', 'VLANs', 'System Admin'], 
-      icon: <Briefcase className="icon-orange" size={24} /> 
-    },
+    {
+      title: 'System Security',
+      desc: 'Rigorous network security and role-based access control.',
+      icon: <Shield size={24} />
+    }
   ];
 
   return (
-    <section id="about" className="about-section py-24 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <span className="badge mb-4">Background</span>
-          <h2 className="section-title gradient-text">About Me</h2>
-          <p className="text-muted mt-4 max-w-2xl mx-auto">
-            A dedicated technologist focused on creating efficient solutions through clean code and robust systems.
-          </p>
-        </motion.div>
-
-        <div className="about-grid">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="about-content"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                <GraduationCap className="text-primary" size={28} />
-              </div>
-              <h3 className="text-2xl font-bold">Academic Excellence</h3>
-            </div>
-            
-            <div className="space-y-6 text-lg text-muted leading-relaxed">
-              <p>
-                I am a detail-oriented and adaptable <span className="text-main font-medium">Computer Science graduate</span> from 
-                <span className="text-main font-medium"> Debre Berhan University</span>. 
-                My academic journey equipped me with a deep understanding of software engineering 
-                principles and complex system architectures.
-              </p>
-              <p>
-                With a strong technical foundation in full-stack development, IT support, and 
-                enterprise networking, I specialize in bridging the gap between sophisticated 
-                software requirements and robust hardware infrastructure.
-              </p>
-            </div>
-            
-            <div className="about-stats flex gap-8 mt-10">
-              <div className="stat-item">
-                <span className="stat-value">3.5+</span>
-                <span className="stat-label">CGPA</span>
-              </div>
-              <div className="stat-divider"></div>
-              <div className="stat-item">
-                <span className="stat-value">B.Sc.</span>
-                <span className="stat-label">Computer Science</span>
-              </div>
-            </div>
-          </motion.div>
-
-          <div className="skills-grid">
-            {skills.map((skill, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="skill-card glass p-6"
-              >
-                <div className="skill-header flex items-center gap-4 mb-4">
-                  <div className="skill-icon-bg p-3 rounded-xl bg-white/5">
-                    {skill.icon}
+    <section id="about" className="about-premium">
+      <div className="container">
+        <div className="about-grid-premium">
+          {/* Services Column */}
+          <div className="services-column">
+            <span className="text-primary font-bold tracking-widest text-xs uppercase mb-6 block">What I Do</span>
+            <div className="services-list">
+              {serviceList.map((service, index) => (
+                <motion.div 
+                  key={index}
+                  whileHover={{ x: 10 }}
+                  className="service-item glass-card p-6 mb-4 flex items-start gap-4"
+                >
+                  <div className="service-icon text-primary mt-1">{service.icon}</div>
+                  <div>
+                    <h4 className="font-bold mb-1">{service.title}</h4>
+                    <p className="text-sm text-muted">{service.desc}</p>
                   </div>
-                  <h4 className="font-bold text-lg">{skill.name}</h4>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Biography Column */}
+          <div className="bio-column">
+            <span className="text-primary font-bold tracking-widest text-xs uppercase mb-6 block">My Background</span>
+            <h2 className="text-4xl font-extrabold mb-8">Engineering Robust <br />Digital Solutions</h2>
+            <div className="bio-text text-muted space-y-6">
+              <p>
+                My approach to software engineering is grounded in the belief that **performance starts at the database layer.** 
+                As a Computer Science graduate from Debre Berhan University, I have spent years mastering 
+                the intersection of clean code and reliable infrastructure.
+              </p>
+              <p>
+                Currently serving as the **Lead Developer at Kudeja**, I have spearheaded the transformation 
+                of their e-commerce ecosystem. My work focuses on PostgreSQL optimization, real-time 
+                concurrency, and building systems that scale without compromise.
+              </p>
+              <div className="stats-mini flex gap-8 mt-10">
+                <div className="mini-stat">
+                  <Zap size={20} className="text-primary mb-2" />
+                  <span className="block font-bold">Fast Scale</span>
+                  <span className="text-xs">Architectures</span>
                 </div>
-                <div className="skill-items flex flex-wrap gap-2">
-                  {skill.items.map((item, i) => (
-                    <span key={i} className="skill-item-tag">
-                      {item}
-                    </span>
-                  ))}
+                <div className="mini-stat">
+                  <Shield size={20} className="text-primary mb-2" />
+                  <span className="block font-bold">Secure</span>
+                  <span className="text-xs">Networking</span>
                 </div>
-              </motion.div>
-            ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

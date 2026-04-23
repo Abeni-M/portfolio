@@ -1,101 +1,101 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Briefcase, Award, GraduationCap, MapPin } from 'lucide-react';
+import { Briefcase, MapPin, Calendar, CheckSquare, Award } from 'lucide-react';
 
 import './Experience.css';
 
 const Experience = () => {
   const experiences = [
     {
-      title: 'Full-stack Developer (Lead)',
-      company: 'Kudeja E-commerce Platform',
+      role: 'Lead Full-Stack Developer',
+      company: 'Kudeja Trading PLC',
       location: 'Addis Ababa, Ethiopia',
-      period: '2025 - Present',
-      description: 'Leading the development of a high-end e-commerce and property management platform. Architected advanced admin dashboards for ad management, integrated real-time communication services, and implemented secure role-based access control. Spearheaded the optimization of complex UI components and data management workflows.',
-      icon: <Briefcase size={22} className="text-primary" />,
-      type: 'work'
+      period: 'Jan 2025 - Present',
+      description: 'Architecting and leading development of a high-end multi-faceted e-commerce and property platform. Focused on high-scale PostgreSQL management and secure administrative infrastructure.',
+      skills: ['PostgreSQL', 'Node.js', 'React', 'Socket.io'],
+      type: 'Work'
     },
     {
-      title: 'Software Engineering Intern',
+      role: 'Software Engineering Intern',
       company: 'Cooperative Bank of Oromia',
       location: 'Addis Ababa, Ethiopia',
-      period: '2024',
-      description: 'Deep-dived into enterprise banking systems and network infrastructure. Mastered IP configuration, advanced subnetting, and secure internal networking protocols while supporting core banking software operations.',
-      icon: <Award size={22} className="text-secondary" />,
-      type: 'internship'
+      period: 'Jun 2024 - Sept 2024',
+      description: 'Mastered IP configuration, advanced subnetting, and VLAN configurations for secure internal banking networking. Supported core banking software operations.',
+      skills: ['Cisco Networking', 'SQL Server', 'System Admin'],
+      type: 'Internship'
     },
     {
-      title: 'B.Sc. in Computer Science',
+      role: 'Computer Science (B.Sc.)',
       company: 'Debre Berhan University',
       location: 'Debre Berhan, Ethiopia',
       period: '2021 - 2025',
-      description: 'Focused on Software Engineering, Data Structures, and Computer Networking. Final Capstone Project: DBU Daily Service – a comprehensive campus management system.',
-      icon: <GraduationCap size={22} className="text-primary" />,
-      type: 'education'
+      description: 'Deep-dived into Software Engineering and Database systems. Developed DBU Daily Service — a campus-wide notification and service management portal.',
+      skills: ['Software Engineering', 'Algorithms', 'PHP/MySQL'],
+      type: 'Education'
     }
   ];
 
   return (
-    <section id="experience" className="experience-section py-24 relative">
-      <div className="max-w-5xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <span className="badge mb-4">Journey</span>
-          <h2 className="section-title gradient-text">Professional Experience</h2>
-          <p className="text-muted mt-4 max-w-2xl mx-auto">
-            A track record of technical excellence and continuous growth in software engineering.
-          </p>
-        </motion.div>
+    <section id="experience" className="bg-secondary/30">
+      <div className="container">
+        <div className="text-center mb-20">
+          <span className="text-primary font-bold tracking-widest text-xs uppercase mb-4 block underline underline-offset-8">My Journey</span>
+          <h2 className="text-5xl font-extrabold mb-6">Experience & Education</h2>
+        </div>
 
-        <div className="timeline-container">
-          <div className="timeline-line"></div>
-          
-          <div className="timeline-items space-y-12">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="timeline-item relative pl-12 md:pl-0"
-              >
-                <div className="timeline-dot-wrapper absolute left-0 md:left-1/2 -translate-x-1/2">
-                  <div className="timeline-dot glass flex items-center justify-center">
-                    {exp.icon}
-                  </div>
+        <div className="experience-stack">
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="experience-record glass-card p-0 overflow-hidden mb-8"
+            >
+              <div className="record-header flex flex-col md:flex-row items-center border-b border-border">
+                <div className="record-type p-8 bg-primary/5 border-r border-border min-w-[140px] flex-center flex-col">
+                  {exp.type === 'Work' && <Briefcase className="text-primary mb-2" size={24} />}
+                  {exp.type === 'Internship' && <Award className="text-primary mb-2" size={24} />}
+                  {exp.type === 'Education' && <CheckSquare className="text-primary mb-2" size={24} />}
+                  <span className="text-[10px] font-black uppercase text-primary tracking-widest">{exp.type}</span>
                 </div>
-
-                <div className={`timeline-content-wrapper flex flex-col ${index % 2 === 0 ? 'md:items-end md:text-right md:pr-[calc(50%+2.5rem)]' : 'md:items-start md:text-left md:pl-[calc(50%+2.5rem)]'}`}>
-                  <div className="experience-card glass p-8 w-full max-w-lg transition-all hover:border-primary/50">
-                    <div className={`flex flex-col mb-4 ${index % 2 === 0 ? 'md:items-end' : 'md:items-start'}`}>
-                      <div className="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider mb-2">
-                        <Calendar size={14} />
-                        {exp.period}
-                      </div>
-                      <h3 className="text-2xl font-bold text-main">{exp.title}</h3>
-                      <p className="text-primary font-medium text-lg mt-1">{exp.company}</p>
+                
+                <div className="record-title-area p-8 flex-grow">
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                      <h3 className="text-2xl font-bold">{exp.role}</h3>
+                      <p className="text-primary font-bold tracking-wide">{exp.company}</p>
                     </div>
-                    
-                    <p className="text-muted leading-relaxed mb-6 text-base">
-                      {exp.description}
-                    </p>
-                    
-                    {exp.location && (
-                      <div className={`flex items-center gap-2 text-sm text-muted ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-                        <MapPin size={14} className="text-secondary" />
-                        {exp.location}
-                      </div>
-                    )}
+                    <div className="flex flex-col items-end">
+                      <span className="text-sm font-bold opacity-60 flex items-center gap-2">
+                        <Calendar size={14} /> {exp.period}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+
+              <div className="record-body p-8 flex flex-col lg:flex-row gap-10">
+                <div className="lg:w-2/3">
+                  <p className="text-muted leading-relaxed mb-6">
+                    {exp.description}
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-muted font-bold">
+                    <MapPin size={12} className="text-primary" /> {exp.location}
+                  </div>
+                </div>
+
+                <div className="lg:w-1/3">
+                  <span className="text-[10px] font-black uppercase text-muted tracking-widest mb-4 block">Key Competencies</span>
+                  <div className="flex flex-wrap gap-2">
+                    {exp.skills.map((skill, i) => (
+                      <span key={i} className="skill-badge">{skill}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

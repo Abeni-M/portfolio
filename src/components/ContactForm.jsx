@@ -1,152 +1,130 @@
 import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Send, Loader2, MapPin, Mail } from 'lucide-react';
+import { FaLinkedin, FaGithub, FaTelegram, FaInstagram, FaFacebook } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
+
 import './ContactForm.css';
 
-const ContactForm = () => {
+const ContactForm = ({ socialLinks }) => {
   const formRef = useRef();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState(null); // 'success', 'error', or null
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setStatus(null);
-
-    // ─── EMAILJS INTEGRATION ────────────────────────────────────────────────
-    // To make this form functional, follow these steps:
-    // 1. Sign up at https://www.emailjs.com/
-    // 2. Create a Email Service (e.g., Gmail)
-    // 3. Create an Email Template
-    // 4. Get your Service ID, Template ID, and Public Key
-    // 5. Uncomment the code below and replace the IDs
 
     try {
-      const result = await emailjs.sendForm(
+      await emailjs.sendForm(
         'service_0ntia54', 
         'template_tfkv1xt', 
         formRef.current, 
-        'aat6ziqGEqgNtDAg6' // Integrated from your newest screenshot
+        'aat6ziqGEqgNtDAg6'
       );
-
-      console.log('Form submitted successfully', result.text);
-      setStatus('success');
-      toast.success('Message sent! I\'ll contact you soon.');
+      toast.success('Message sent! I will respond shortly.');
       formRef.current.reset();
     } catch (error) {
-      console.error('Failed to send email:', error);
-      setStatus('error');
       toast.error('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const socials = [
+    { icon: <FaLinkedin size={18} />, label: 'LinkedIn', link: socialLinks?.linkedin || '#', color: '#0077b5' },
+    { icon: <FaGithub size={18} />, label: 'GitHub', link: socialLinks?.github || '#', color: '#ffffff' },
+    { icon: <FaTelegram size={18} />, label: 'Telegram', link: socialLinks?.telegram || '#', color: '#0088cc' },
+    { icon: <FaInstagram size={18} />, label: 'Instagram', link: socialLinks?.instagram || '#', color: '#e4405f' },
+    { icon: <FaFacebook size={18} />, label: 'Facebook', link: socialLinks?.facebook || '#', color: '#1877f2' }
+  ];
+
   return (
-    <div className="contact-container">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="contact-card glass"
-      >
-        <div className="contact-header">
-          <h2 className="gradient-text">Get in Touch</h2>
-          <p>Send me a message or reach out directly at <a href="mailto:abenezermulatu41@gmail.com" className="email-link">abenezermulatu41@gmail.com</a></p>
-        </div>
+    <section id="contact" className="contact-section-premium">
+      <div className="container">
+        <div className="contact-grid-premium">
+          {/* Left Panel: Connect Cards */}
+          <div className="contact-info-panel">
+            <span className="text-primary font-bold tracking-widest text-xs uppercase mb-4 block">Connections</span>
+            <h2 className="text-4xl font-extrabold mb-8">Let's Connect</h2>
+            
+            <div className="location-card glass-card p-6 mb-10 flex items-center gap-4">
+              <div className="icon-wrap bg-primary/10 text-primary p-3 rounded-xl">
+                <MapPin size={24} />
+              </div>
+              <div>
+                <span className="block text-xs text-muted uppercase font-bold tracking-widest">Base Location</span>
+                <span className="text-lg font-bold">Addis Ababa, Ethiopia</span>
+              </div>
+            </div>
 
-        <form ref={formRef} onSubmit={handleSubmit} className="contact-form">
-          <div className="form-group">
-            <label htmlFor="user_name">Full Name</label>
-            <input 
-              type="text" 
-              id="user_name" 
-              name="user_name" 
-              placeholder="John Doe" 
-              required 
-            />
+            {/* Horizontal Social Links with Modern UI */}
+            <div className="social-row-modern flex flex-wrap gap-4 mb-10">
+              {socials.map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  className="social-icon-modern glass-card p-4 flex items-center justify-center"
+                  style={{ color: social.color }}
+                >
+                  {social.icon}
+                </motion.a>
+              ))}
+            </div>
+
+            <div className="email-direct mt-10">
+              <a href="mailto:abenezermulatu41@gmail.com" className="flex items-center gap-3 text-muted hover:text-primary transition-colors">
+                <Mail size={18} />
+                <span className="font-medium">abenezermulatu41@gmail.com</span>
+              </a>
+            </div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="user_email">Email Address</label>
-            <input 
-              type="email" 
-              id="user_email" 
-              name="user_email" 
-              placeholder="john@example.com" 
-              required 
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="subject">Subject</label>
-            <input 
-              type="text" 
-              id="subject" 
-              name="subject" 
-              placeholder="Project Inquiry" 
-              required 
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="message">Message</label>
-            <textarea 
-              id="message" 
-              name="message" 
-              rows="5" 
-              placeholder="How can I help you?" 
-              required
-            ></textarea>
-          </div>
-
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            type="submit"
-            disabled={isSubmitting}
-            className={`submit-btn ${isSubmitting ? 'loading' : ''}`}
+          {/* Right Panel: Form */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="contact-form-panel glass-card p-8 md:p-12"
           >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="animate-spin" size={20} />
-                Sending...
-              </>
-            ) : (
-              <>
-                <Send size={20} />
-                Send Message
-              </>
-            )}
-          </motion.button>
-        </form>
+            <form ref={formRef} onSubmit={handleSubmit} className="form-premium">
+              <div className="form-row-premium">
+                <div className="form-group-premium">
+                  <label>Your Name</label>
+                  <input type="text" name="user_name" placeholder="Abenezer Mulatu" required />
+                </div>
+                <div className="form-group-premium">
+                  <label>Email Address</label>
+                  <input type="email" name="user_email" placeholder="example@gmail.com" required />
+                </div>
+              </div>
 
-        <AnimatePresence>
-          {status && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className={`status-message ${status}`}
-            >
-              {status === 'success' ? (
-                <>
-                  <CheckCircle size={20} />
-                  <span>Message sent successfully!</span>
-                </>
-              ) : (
-                <>
-                  <AlertCircle size={20} />
-                  <span>Something went wrong. Please try again.</span>
-                </>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
-    </div>
+              <div className="form-group-premium">
+                <label>Subject</label>
+                <input type="text" name="subject" placeholder="Project Inquiry" required />
+              </div>
+
+              <div className="form-group-premium">
+                <label>Message</label>
+                <textarea name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+              </div>
+
+              <button 
+                type="submit" 
+                disabled={isSubmitting} 
+                className="btn-pill btn-pill-solid w-full justify-center py-4 text-base"
+              >
+                {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : <Send className="mr-2" size={18} />}
+                {isSubmitting ? 'Sending Message...' : 'Send Message'}
+              </button>
+            </form>
+          </motion.div>
+        </div>
+      </div>
+    </section>
   );
 };
 

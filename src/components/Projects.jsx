@@ -1,109 +1,86 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Layers, ShoppingBag, Globe } from 'lucide-react';
+import { ExternalLink, Github, Database, Layers, ArrowRight } from 'lucide-react';
 import kudejaImg from '../assets/kudeja-preview.png';
 
 import './Projects.css';
 
 const Projects = () => {
-  const projects = [
+  const projectList = [
     {
-      title: 'Kudeja E-commerce Platform',
-      category: 'Full-stack Platform',
-      description: 'A premium e-commerce and property management system with real-time bidding, ad management, and live chat integration. Features a sophisticated admin dashboard and role-based access control.',
+      title: 'Kudeja Platform',
+      type: 'E-commerce & Property',
+      tech: ['React', 'Node.js', 'PostgreSQL', 'Socket.io'],
+      description: 'Lead developer for a massive multi-vendor ecosystem. Architected the core relational database to handle high-concurrency transactions and real-time ad placement.',
       image: kudejaImg,
-      tags: ['React', 'Node.js', 'MongoDB', 'Socket.io', 'EmailJS'],
-      links: {
-        github: '#',
-        live: '#'
-      },
-      featured: true
+      links: { github: '#', live: '#' }
     },
     {
-      title: 'DBU Daily Service',
-      category: 'Student Portal',
-      description: 'A comprehensive campus management system designed for Debre Berhan University students. Streamlines access to academic resources, notifications, and campus services.',
-      image: 'https://images.unsplash.com/photo-1523050335392-9bc56751d11e?auto=format&fit=crop&q=80&w=800',
-      tags: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
-      links: {
-        github: '#',
-        live: '#'
-      },
-      featured: false
+      title: 'DBU Daily Portal',
+      type: 'Campus Management',
+      tech: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
+      description: 'Unified student and faculty portal for Debre Berhan University. Features automated grading pipelines, resource scheduling, and real-time departmental notifications.',
+      image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800',
+      links: { github: '#', live: '#' }
     },
     {
-      title: 'Banking System Simulation',
-      category: 'Academic Project',
-      description: 'A secure banking application prototype developed during my internship. Implements core banking logic, transaction management, and secure user authentication.',
-      image: 'https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&q=80&w=800',
-      tags: ['Java', 'SQL Server', 'Networking'],
-      links: {
-        github: '#',
-        live: '#'
-      },
-      featured: false
+      title: 'Banking Backend',
+      type: 'Secure Architecture',
+      tech: ['Java', 'SQL Server', 'Secure Networking'],
+      description: 'Prototype of a secure, high-integrity banking system. Implemented during my time at the Cooperative Bank of Oromia, focusing on encryption and database transaction safety.',
+      image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800',
+      links: { github: '#', live: '#' }
     }
   ];
 
   return (
-    <section id="projects" className="py-24 relative">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <span className="badge mb-4">Portfolio</span>
-          <h2 className="section-title gradient-text">Featured Projects</h2>
-          <p className="text-muted max-w-2xl mx-auto mt-4">
-            A selection of my recent work in web development, system architecture, and UI/UX design.
+    <section id="projects" className="projects-premium">
+      <div className="container">
+        <div className="text-center mb-16">
+          <span className="text-primary font-bold tracking-widest text-xs uppercase mb-4 block underline underline-offset-8">My Portfolio</span>
+          <h2 className="text-5xl font-extrabold mb-6">Recent Work</h2>
+          <p className="text-muted max-w-2xl mx-auto">
+            A selection of software systems where architecture meets business logic.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="projects-grid">
-          {projects.map((project, index) => (
+        <div className="projects-grid-premium">
+          {projectList.map((project, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className={`project-card glass ${project.featured ? 'featured' : ''}`}
+              className="glass-card project-card-premium overflow-hidden flex flex-col"
             >
-              <div className="project-image-wrapper">
-                <img src={project.image} alt={project.title} className="project-image" />
-                <div className="project-overlay">
-                  <div className="flex gap-4">
-                    <a href={project.links.github} className="social-icon-btn glass">
-                      <Github size={20} />
-                    </a>
-                    <a href={project.links.live} className="social-icon-btn glass">
-                      <ExternalLink size={20} />
-                    </a>
-                  </div>
+              <div className="project-preview relative overflow-hidden group h-64">
+                <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="project-overlay absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex-center">
+                   <div className="flex gap-4">
+                      <a href={project.links.live} className="p-3 bg-white text-primary rounded-full hover:scale-110 transition-transform"><ExternalLink size={20} /></a>
+                      <a href={project.links.github} className="p-3 bg-white text-primary rounded-full hover:scale-110 transition-transform"><Github size={20} /></a>
+                   </div>
                 </div>
               </div>
-              
-              <div className="project-content">
-                <div className="flex justify-between items-start mb-3">
-                  <div>
-                    <span className="project-category">{project.category}</span>
-                    <h3 className="project-title">{project.title}</h3>
-                  </div>
-                  {project.featured && (
-                    <div className="featured-badge">
-                      <Layers size={14} className="mr-1" /> Featured
-                    </div>
-                  )}
+
+              <div className="p-8 flex flex-col flex-grow">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-primary text-[10px] uppercase font-black tracking-widest">{project.type}</span>
+                  <Layers size={14} className="text-muted" strokeWidth={3} />
                 </div>
-                
-                <p className="project-desc">{project.description}</p>
-                
-                <div className="project-tags">
-                  {project.tags.map((tag, i) => (
-                    <span key={i} className="project-tag">{tag}</span>
-                  ))}
+                <h3 className="text-xl font-bold mb-4">{project.title}</h3>
+                <p className="text-muted text-sm leading-relaxed mb-8 flex-grow">
+                  {project.description}
+                </p>
+                <div className="project-footer flex justify-between items-center mt-auto pt-6 border-t border-border">
+                  <div className="tech-tags flex gap-2">
+                    {project.tech.slice(0, 2).map((t, i) => (
+                      <span key={i} className="text-[10px] font-bold text-muted uppercase">{t}</span>
+                    ))}
+                  </div>
+                  <a href={project.links.live} className="text-primary flex items-center gap-2 text-xs font-bold hover:gap-4 transition-all">
+                    View Project <ArrowRight size={14} />
+                  </a>
                 </div>
               </div>
             </motion.div>

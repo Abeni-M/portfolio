@@ -1,53 +1,61 @@
-.timeline-container {
-  position: relative;
+.experience-record {
+  /* Handled by glass-card class */
 }
 
-.timeline-line {
-  position: absolute;
-  left: 1.5rem;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--primary), var(--secondary), transparent);
-  opacity: 0.3;
+.record-header {
+  background: rgba(255, 255, 255, 0.01);
 }
 
-@media (min-width: 768px) {
-  .timeline-line {
-    left: 50%;
-    transform: translateX(-50%);
-  }
+.record-type {
+  text-align: center;
 }
 
-.timeline-dot-wrapper {
-  z-index: 10;
-}
-
-.timeline-dot {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border-width: 2px;
-}
-
-.experience-card {
-  border-radius: 1.5rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+.skill-badge {
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: var(--bg-deep);
   border: 1px solid var(--border);
+  color: var(--text-main);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
 }
 
-.experience-card:hover {
-  transform: translateY(-5px);
+.skill-badge:hover {
   border-color: var(--primary);
-  box-shadow: 0 20px 40px -15px var(--primary-glow);
+  color: var(--primary);
+  background: var(--accent-glow);
 }
 
-@media (max-width: 767px) {
-  .timeline-content-wrapper {
-    width: 100%;
+@media (max-width: 768px) {
+  .record-header {
+    flex-direction: column;
   }
   
-  .experience-card {
-    margin-left: 1rem;
+  .record-type {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    width: 100%;
+    padding: 1.5rem;
+    flex-direction: row;
+    gap: 1rem;
+    min-width: auto;
+  }
+  
+  .record-title-area {
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .record-title-area div {
+    align-items: center;
+  }
+  
+  .record-body {
+    padding: 1.5rem;
+    flex-direction: column;
+    text-align: center;
   }
 }

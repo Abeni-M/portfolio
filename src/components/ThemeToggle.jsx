@@ -5,33 +5,18 @@ import { Sun, Moon } from 'lucide-react';
 const ThemeToggle = ({ theme, toggleTheme }) => {
   return (
     <motion.button
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
       onClick={toggleTheme}
-      className="theme-toggle-btn glass"
+      className="btn-outline flex-center"
+      style={{ width: '40px', height: '40px', padding: 0, borderRadius: '50%' }}
       aria-label="Toggle Theme"
     >
-      <div className="icon-container">
-        {theme === 'dark' ? (
-          <motion.div
-            key="moon"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -20, opacity: 0 }}
-          >
-            <Moon size={20} className="text-primary" />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="sun"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -20, opacity: 0 }}
-          >
-            <Sun size={20} className="text-primary" />
-          </motion.div>
-        )}
-      </div>
+      {theme === 'dark' ? (
+        <Sun size={18} className="text-primary" />
+      ) : (
+        <Moon size={18} className="text-primary" />
+      )}
     </motion.button>
   );
 };
