@@ -27,13 +27,13 @@ function App() {
   };
 
   const name = "Abenezer Mulatu";
-  
+
   const socialLinks = {
     github: "https://github.com/Abeni-M",
     linkedin: "https://www.linkedin.com/in/abenezer-mulatu-b42595381",
-    telegram: "#",
-    instagram: "#",
-    facebook: "#"
+    telegram: "https://t.me/Abe_m_1",
+    instagram: "https://www.instagram.com/abe_ne_zer_m?igsh=MWhxc2JqcGJpZTN0ag==",
+    facebook: "https://www.facebook.com/abenezer.mulatu.37"
   };
 
   const socialIcons = [
@@ -47,7 +47,7 @@ function App() {
   return (
     <div className="app-shell">
       <Toaster position="top-right" />
-      
+
       {/* Floating Social Toolbar (Desktop) moved to its own component or simplified */}
       <div className="floating-socials hidden lg:flex">
         <div className="social-rack glass-card p-2 flex flex-col gap-4">
@@ -62,7 +62,7 @@ function App() {
       {/* Premium Navbar */}
       <nav className="premium-nav">
         <div className="container nav-content">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="logo-text"
@@ -83,7 +83,7 @@ function App() {
         </div>
 
         {/* Mobile Menu Overlay */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: isMenuOpen ? 1 : 0, y: isMenuOpen ? 0 : -20 }}
           className={`mobile-menu-overlay ${isMenuOpen ? 'active' : ''}`}
@@ -101,7 +101,7 @@ function App() {
       <header className="hero-split">
         <div className="container hero-grid">
           {/* Photo Moved to Top (for mobile and visual priority) */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
@@ -115,7 +115,7 @@ function App() {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -126,20 +126,20 @@ function App() {
               Full-Stack <br />
               <span className="stroke-text">Developer</span>
             </h1>
-            
+
             <p className="hero-description mb-8 text-muted max-w-xl">
-              Specialized in crafting high-performance e-commerce ecosystems and 
+              Specialized in crafting high-performance e-commerce ecosystems and
               highly-secure database architectures. Lead developer at **Kudeja Trading PLC**.
             </p>
 
             <div className="social-links-row mb-12 flex flex-wrap gap-4 items-center">
               {socialIcons.map((social, i) => (
-                <motion.a 
+                <motion.a
                   key={i}
-                  whileHover={{ y: -5, scale: 1.1 }} 
-                  href={social.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                  whileHover={{ y: -5, scale: 1.1 }}
+                  href={social.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="social-pill glass-card flex items-center gap-2 px-4 py-2"
                   style={{ '--hover-color': social.color }}
                 >
@@ -152,8 +152,8 @@ function App() {
               <a href="#contact" className="btn-pill btn-pill-solid">
                 Hire Me <ChevronRight size={18} />
               </a>
-              <a 
-                href="#" 
+              <a
+                href="#"
                 onClick={(e) => {
                   e.preventDefault();
                   toast.error("CV is being updated. Please check back soon!");
@@ -215,7 +215,7 @@ function App() {
           <p className="text-primary font-bold tracking-widest text-xs uppercase mb-8">Stay Connected</p>
           <div className="flex justify-center gap-6 mb-12">
             {socialIcons.map((s, i) => (
-               <a key={i} href={s.link} className="social-footer-link" style={{ color: s.color }}>{s.icon}</a>
+              <a key={i} href={s.link} className="social-footer-link" style={{ color: s.color }}>{s.icon}</a>
             ))}
           </div>
           <p className="text-[10px] text-muted/40 uppercase tracking-[0.3em]">
