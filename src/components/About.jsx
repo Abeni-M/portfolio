@@ -55,7 +55,7 @@ const About = () => {
           {/* Biography Column */}
           <div className="bio-column">
             <span className="text-primary font-bold tracking-widest text-xs uppercase mb-6 block">My Background</span>
-            <h2 className="text-4xl font-extrabold mb-8">Engineering Robust <br />Digital Solutions</h2>
+            <h2 className="text-4xl font-extrabold mb-8">education and skills<br />Digital Solutions</h2>
             <div className="bio-text text-muted space-y-6">
               <p>
                 My approach to computer science is grounded in the belief that performance starts at the database layer.
