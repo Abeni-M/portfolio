@@ -16,21 +16,14 @@ const Projects = () => {
       links: { github: '#', live: '#' }
     },
     {
-      title: 'DBU Daily Portal',
-      type: 'Campus Management',
+      title: 'Video editing',
+      type: 'Video editing',
       tech: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
-      description: 'Unified student and faculty portal for Debre Berhan University. Features automated grading pipelines, resource scheduling, and real-time departmental notifications.',
-      image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800',
+      description: 'Video editing platform',
+      image: 'src/assets/video-editing-preview.png',
       links: { github: '#', live: '#' }
     },
-    {
-      title: 'Banking Backend',
-      type: 'Secure Architecture',
-      tech: ['Java', 'SQL Server', 'Secure Networking'],
-      description: 'Prototype of a secure, high-integrity banking system. Implemented during my time at the Cooperative Bank of Oromia, focusing on encryption and database transaction safety.',
-      image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800',
-      links: { github: '#', live: '#' }
-    }
+
   ];
 
   return (
@@ -56,10 +49,10 @@ const Projects = () => {
               <div className="project-preview relative overflow-hidden group h-64">
                 <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="project-overlay absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex-center">
-                   <div className="flex gap-4">
-                      <a href={project.links.live} className="p-3 bg-white text-primary rounded-full hover:scale-110 transition-transform"><ExternalLink size={20} /></a>
-                      <a href={project.links.github} className="p-3 bg-white text-primary rounded-full hover:scale-110 transition-transform"><Github size={20} /></a>
-                   </div>
+                  <div className="flex gap-4">
+                    <a href={project.links.live} className="p-3 bg-white text-primary rounded-full hover:scale-110 transition-transform"><ExternalLink size={20} /></a>
+                    <a href={project.links.github} className="p-3 bg-white text-primary rounded-full hover:scale-110 transition-transform"><Github size={20} /></a>
+                  </div>
                 </div>
               </div>
 

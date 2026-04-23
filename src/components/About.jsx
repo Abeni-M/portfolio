@@ -7,6 +7,11 @@ import './About.css';
 const About = () => {
   const serviceList = [
     {
+      title: 'Video Editing',
+      desc: 'End-to-end architecture using adobe premiere pro, after effects, photoshop .',
+      icon: <Code size={24} />
+    },
+    {
       title: 'Full-Stack Development',
       desc: 'End-to-end architecture using React, Node.js, and modern frameworks.',
       icon: <Code size={24} />
@@ -32,7 +37,7 @@ const About = () => {
             <span className="text-primary font-bold tracking-widest text-xs uppercase mb-6 block">What I Do</span>
             <div className="services-list">
               {serviceList.map((service, index) => (
-                <motion.div 
+                <motion.div
                   key={index}
                   whileHover={{ x: 10 }}
                   className="service-item glass-card p-6 mb-4 flex items-start gap-4"
@@ -53,13 +58,13 @@ const About = () => {
             <h2 className="text-4xl font-extrabold mb-8">Engineering Robust <br />Digital Solutions</h2>
             <div className="bio-text text-muted space-y-6">
               <p>
-                My approach to software engineering is grounded in the belief that **performance starts at the database layer.** 
-                As a Computer Science graduate from Debre Berhan University, I have spent years mastering 
+                My approach to computer science is grounded in the belief that performance starts at the database layer.
+                As a Computer Science graduate from Debre Berhan University, I have spent years mastering
                 the intersection of clean code and reliable infrastructure.
               </p>
               <p>
-                Currently serving as the **Lead Developer at Kudeja**, I have spearheaded the transformation 
-                of their e-commerce ecosystem. My work focuses on PostgreSQL optimization, real-time 
+                Currently serving as the Developer and adminstrator at Kudeja, I have spearheaded the transformation
+                of their e-commerce ecosystem. My work focuses on PostgreSQL optimization, real-time
                 concurrency, and building systems that scale without compromise.
               </p>
               <div className="stats-mini flex gap-8 mt-10">

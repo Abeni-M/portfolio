@@ -7,29 +7,21 @@ import './Experience.css';
 const Experience = () => {
   const experiences = [
     {
-      role: 'Lead Full-Stack Developer',
+      role: ' Developer and adminstrator',
       company: 'Kudeja Trading PLC',
       location: 'Addis Ababa, Ethiopia',
-      period: 'Jan 2025 - Present',
+      period: 'Present',
       description: 'Architecting and leading development of a high-end multi-faceted e-commerce and property platform. Focused on high-scale PostgreSQL management and secure administrative infrastructure.',
       skills: ['PostgreSQL', 'Node.js', 'React', 'Socket.io'],
       type: 'Work'
     },
-    {
-      role: 'Software Engineering Intern',
-      company: 'Cooperative Bank of Oromia',
-      location: 'Addis Ababa, Ethiopia',
-      period: 'Jun 2024 - Sept 2024',
-      description: 'Mastered IP configuration, advanced subnetting, and VLAN configurations for secure internal banking networking. Supported core banking software operations.',
-      skills: ['Cisco Networking', 'SQL Server', 'System Admin'],
-      type: 'Internship'
-    },
+
     {
       role: 'Computer Science (B.Sc.)',
       company: 'Debre Berhan University',
       location: 'Debre Berhan, Ethiopia',
       period: '2021 - 2025',
-      description: 'Deep-dived into Software Engineering and Database systems. Developed DBU Daily Service — a campus-wide notification and service management portal.',
+      description: 'web developing and Database systems. Developed DBU Daily Service — a campus-wide notification and service management portal.',
       skills: ['Software Engineering', 'Algorithms', 'PHP/MySQL'],
       type: 'Education'
     }
@@ -59,7 +51,7 @@ const Experience = () => {
                   {exp.type === 'Education' && <CheckSquare className="text-primary mb-2" size={24} />}
                   <span className="text-[10px] font-black uppercase text-primary tracking-widest">{exp.type}</span>
                 </div>
-                
+
                 <div className="record-title-area p-8 flex-grow">
                   <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
