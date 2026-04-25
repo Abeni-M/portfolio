@@ -97,7 +97,7 @@ const About = () => {
         </div>
 
         {/* The Heart Behind the Code */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -108,23 +108,23 @@ const About = () => {
           <div className="absolute top-0 right-0 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
 
-          <motion.div 
+          <motion.div
             whileHover={{ scale: 1.02, rotate: -2 }}
             className="love-image-wrapper shrink-0 relative w-full max-w-[280px] md:max-w-[320px] mx-auto md:mx-0 h-[380px] md:h-[450px]"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-pink-500 to-primary rounded-2xl blur-xl opacity-40"></div>
             <div className="relative w-full h-full z-10 rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(236,72,153,0.3)] border border-white/10">
               <AnimatePresence>
-                <motion.img 
+                <motion.img
                   key={currentImageIndex}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  src={loveImages[currentImageIndex]} 
-                  alt="My Inspiration" 
-                  className="absolute inset-0 w-full h-full object-cover" 
-                  style={{ objectPosition: 'center' }} 
+                  src={loveImages[currentImageIndex]}
+                  alt="My Inspiration"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ objectPosition: 'center' }}
                 />
               </AnimatePresence>
             </div>
@@ -138,15 +138,16 @@ const About = () => {
             <h3 className="text-3xl md:text-4xl font-extrabold mb-6 text-white leading-tight">Beyond the Code</h3>
             <div className="text-muted space-y-5 text-lg leading-relaxed relative">
               <p>
-                In a world governed by logic, algorithms, and rigid structures, you are my beautiful exception. 
-                You bring profound warmth to the cold screens and vibrant color to the binary monochrome of my days. 
-                Every late-night debugging session, every complex system I build, and every milestone I reach 
-                is deeply fueled by the endless love, belief, and support you pour into me.
+                በህይወቴ መንገድ ላይ ካጋጠሙኝ ድንቆች ሁሉ፣ ትልቁ ተአምሬ አንቺ ነሽ።
+                የደረቀውን ማንነቴን የምታለመልሚ፣ የልቤ ዝናብ ነሽ። ስፈርስ የምትጠግኚኝ፣
+                ስጠፋ የምታገኚኝ—አንቺ ለእኔ ከሰውም በላይ ነሽ። ካንቺ ፍቅር ውጭ የሚኖር
+                ህይወት ትርጉም የለሽ ባዶ ስእል ነው።
               </p>
               <p>
-                You are my calmest harbor in the chaos of life, my greatest joy, and the most breathtaking reality 
-                I could ever know. More than just my partner, you are the very soul of my ambition. I love you 
-                deeper than any ocean, infinitely more than words could ever convey.
+                አንቺ ለእኔ ከምድር ስበት በላይ ነሽ፤ የነፍሴን ሚዛን ጠባቂ፣ የልቤም ብቸኛ ዜማ።
+                በሺህ ቃላት መሃል ልገልጸው የማልችለው፣ ግን በየትንፋሼ ውስጥ የሚመላለስ ጥልቅ ስሜቴ ነሽ።
+                ፍቅርሽን መቅመስ ማለት ዓለምን በአዲስ አይን ማየት ማለት ነው።
+                ካንቺ ጋር ስሆን ብቻ ነው 'ቤት' እንዳለሁ የሚሰማኝ።
               </p>
             </div>
           </div>
