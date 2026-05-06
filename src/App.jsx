@@ -141,7 +141,7 @@ function App() {
             <a href="#about" className="nav-link">About</a>
             <a href="#experience" className="nav-link">Experience</a>
             <a href="#projects" className="nav-link">Portfolio</a>
-            <a href="#contact" className="btn-pill btn-pill-solid px-6 py-2 h-auto text-[10px] font-black">Let's Talk</a>
+            <a href="mailto:abenezer@abenezer.me" className="btn-pill btn-pill-solid px-6 py-2 h-auto text-[10px] font-black">Let's Talk</a>
             <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
           </div>
 
@@ -197,7 +197,7 @@ function App() {
 
             <p className="hero-description mb-8 text-muted max-w-xl">
               I help startups and businesses build fast, secure e-commerce ecosystems and 
-              high-performance architectures. **5,000+ clients** served through Kudeja Trading PLC.
+              high-performance architectures. <span className="text-primary font-bold">5,000+ clients</span> served through Kudeja Trading PLC.
             </p>
 
             <div className="social-links-row mb-12 flex flex-wrap gap-4 items-center">
@@ -231,7 +231,7 @@ function App() {
                 <span className="stat-label">Clients Served</span>
               </div>
               <div className="stat-box">
-                <span className="stat-value">$5/hr</span>
+                <span className="stat-value">$35/hr</span>
                 <span className="stat-label">Starting Rate</span>
               </div>
               <div className="stat-box">
@@ -339,16 +339,25 @@ const ProjectSpotlight = () => {
 const Pricing = () => {
   const packages = [
     {
-      name: "Standard Dev",
-      price: "$5/hr",
-      features: ["Full-Stack Development", "PostgreSQL Optimization", "24h Response Time", "Git Version Control"],
-      highlight: false
+      name: "Launch Package",
+      price: "$1,200",
+      features: ["Custom Landing Page", "Essential SEO", "Performance Optimization", "2 Weeks Support"],
+      highlight: false,
+      period: "Fixed"
     },
     {
-      name: "Enterprise Solution",
+      name: "Growth Package",
+      price: "$3,500",
+      features: ["Full Web Application", "E-commerce Integration", "Advanced Dashboard", "1 Month Support"],
+      highlight: true,
+      period: "Fixed"
+    },
+    {
+      name: "Enterprise Build",
       price: "Custom",
-      features: ["E-commerce Ecosystems", "Logistic Systems", "High-Scale Architecture", "Priority Support"],
-      highlight: true
+      features: ["High-Scale Architecture", "PostgreSQL Optimization", "AWS/Docker Deployment", "Priority 24/7 Support"],
+      highlight: false,
+      period: "Quote"
     }
   ];
 
@@ -358,21 +367,21 @@ const Pricing = () => {
         <div className="text-center mb-16">
           <span className="text-primary font-bold tracking-widest text-xs uppercase mb-4 block underline underline-offset-8">Investment</span>
           <h2 className="text-4xl font-extrabold mb-4">Transparent Pricing</h2>
-          <p className="text-muted max-w-xl mx-auto">Scalable solutions for every budget, from hourly consulting to full-scale enterprise systems.</p>
+          <p className="text-muted max-w-xl mx-auto">Scalable solutions for startups and growing businesses. Hourly rate available at <span className="text-primary font-bold">$35–$50/hr</span>.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {packages.map((pkg, i) => (
             <motion.div
               key={i}
               whileHover={{ y: -10 }}
-              className={`glass-card p-10 border ${pkg.highlight ? 'border-primary' : 'border-white/10'} relative overflow-hidden`}
+              className={`glass-card p-10 border ${pkg.highlight ? 'border-primary shadow-[0_0_30px_rgba(99,102,241,0.1)]' : 'border-white/10'} relative overflow-hidden`}
             >
-              {pkg.highlight && <div className="absolute top-0 right-0 bg-primary text-white text-[10px] font-black px-4 py-1 uppercase tracking-widest">Recommended</div>}
+              {pkg.highlight && <div className="absolute top-0 right-0 bg-primary text-white text-[10px] font-black px-4 py-1 uppercase tracking-widest">Most Popular</div>}
               <h3 className="text-xl font-bold mb-2">{pkg.name}</h3>
               <div className="flex items-baseline gap-2 mb-8">
                 <span className="text-4xl font-black text-primary">{pkg.price}</span>
-                <span className="text-xs text-muted font-bold uppercase tracking-widest">{pkg.price === 'Custom' ? '' : '/ hour'}</span>
+                <span className="text-xs text-muted font-bold uppercase tracking-widest">{pkg.period}</span>
               </div>
               <ul className="space-y-4 mb-10">
                 {pkg.features.map((feat, j) => (
@@ -382,7 +391,7 @@ const Pricing = () => {
                   </li>
                 ))}
               </ul>
-              <a href="#contact" className={`btn-pill w-full justify-center ${pkg.highlight ? 'btn-pill-solid' : 'btn-pill-outline'}`}>Get Started</a>
+              <a href="mailto:abenezer@abenezer.me" className={`btn-pill w-full justify-center ${pkg.highlight ? 'btn-pill-solid' : 'btn-pill-outline'}`}>Get Started</a>
             </motion.div>
           ))}
         </div>

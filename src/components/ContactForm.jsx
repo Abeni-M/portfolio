@@ -87,9 +87,9 @@ const ContactForm = ({ socialLinks }) => {
             </div>
 
             <div className="email-direct mt-10">
-              <a href="mailto:abenezermulatu41@gmail.com" className="flex items-center gap-3 text-muted hover:text-primary transition-colors">
+              <a href="mailto:abenezer@abenezer.me" className="flex items-center gap-3 text-muted hover:text-primary transition-colors">
                 <Mail size={18} />
-                <span className="font-medium">abenezermulatu41@gmail.com</span>
+                <span className="font-medium">abenezer@abenezer.me</span>
               </a>
             </div>
           </div>

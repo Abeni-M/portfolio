@@ -21,15 +21,6 @@ const Projects = () => {
       links: { github: 'https://github.com/Abeni-M', live: 'https://kudeja.com' }
     },
     {
-      title: 'Global Brand Visuals',
-      type: 'Media Production',
-      tech: ['Adobe Premiere', 'After Effects', 'Photoshop'],
-      description: 'High-end video production and motion graphics for corporate clients. Developed automated rendering workflows for consistent brand storytelling.',
-      result: 'Automated 60% of video rendering workflows.',
-      image: videoEditingImg,
-      links: { github: '#', live: '#' }
-    },
-    {
       title: 'Nexus API Gateway',
       type: 'Backend Infrastructure',
       tech: ['Node.js', 'Redis', 'Docker', 'TypeScript'],
