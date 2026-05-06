@@ -4,6 +4,7 @@ import { ExternalLink, Github, Database, Layers, ArrowRight, X, Info } from 'luc
 import kudejaImg from '../assets/kudeja-preview.png';
 import kudejaHeroImg from '../assets/kudeja-hero-site.png';
 import videoEditingImg from '../assets/video-editing-preview.png';
+import nexusImg from '../assets/nexus api.jpeg';
 
 import './Projects.css';
 
@@ -34,7 +35,7 @@ const Projects = () => {
       tech: ['Node.js', 'Redis', 'Docker', 'TypeScript'],
       description: 'Engineered a high-performance API gateway designed for high-concurrency traffic. Implemented distributed rate-limiting using Redis, JWT-based authentication, and dynamic request routing.',
       result: 'Reduced average API latency by 35% through intelligent caching.',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80&w=800',
+      image: nexusImg,
       links: { github: 'https://github.com/Abeni-M', live: '#' }
     }
   ];
