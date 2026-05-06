@@ -48,6 +48,17 @@ const ContactForm = ({ socialLinks }) => {
             <span className="text-primary font-bold tracking-widest text-xs uppercase mb-4 block">Connections</span>
             <h2 className="text-4xl font-extrabold mb-8">Let's Connect</h2>
             
+            <div className="location-card glass-card p-6 mb-6 flex items-center gap-4 border-l-4 border-primary">
+              <div className="icon-wrap bg-primary/10 text-primary p-3 rounded-xl">
+                <Loader2 size={24} className="animate-pulse" />
+              </div>
+              <div>
+                <span className="block text-xs text-muted uppercase font-bold tracking-widest">Availability</span>
+                <span className="text-lg font-bold">Always Available</span>
+                <span className="block text-[10px] text-primary font-black uppercase mt-1">Reply within 24 hours</span>
+              </div>
+            </div>
+
             <div className="location-card glass-card p-6 mb-10 flex items-center gap-4">
               <div className="icon-wrap bg-primary/10 text-primary p-3 rounded-xl">
                 <MapPin size={24} />

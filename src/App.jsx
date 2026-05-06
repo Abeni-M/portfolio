@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import ContactForm from './components/ContactForm';
 import About from './components/About';
 import Experience from './components/Experience';
@@ -16,6 +18,7 @@ import './App.css';
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const portfolioRef = useRef();
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -24,6 +27,71 @@ function App() {
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+
+  const handleDownloadPDF = async () => {
+    const toastId = toast.loading('Generating your PDF...');
+    try {
+      const element = portfolioRef.current;
+      
+      // Ensure everything is visible for capture
+      const canvas = await html2canvas(element, {
+        scale: 1.5, // Balanced for quality vs size
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: theme === 'dark' ? '#050505' : '#f8fafc',
+        windowWidth: 1400, // Fixed width for consistent layout
+        onclone: (clonedDoc) => {
+          // Hide elements that shouldn't be in the PDF
+          const elementsToHide = [
+            '.premium-nav', 
+            '.floating-socials', 
+            '.hero-cta', 
+            '.scroll-to-top', 
+            '.Toaster',
+            '#contact',
+            '.footer-premium'
+          ];
+          elementsToHide.forEach(selector => {
+            const el = clonedDoc.querySelector(selector);
+            if (el) el.style.display = 'none';
+          });
+          
+          // Force opacity for motion elements
+          const motionElements = clonedDoc.querySelectorAll('[style*="opacity: 0"]');
+          motionElements.forEach(el => el.style.opacity = '1');
+        }
+      });
+
+      const imgData = canvas.toDataURL('image/jpeg', 0.6); // Compress to 60% quality
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      
+      const imgProps = pdf.getImageProperties(imgData);
+      const contentHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      
+      let heightLeft = contentHeight;
+      let position = 0;
+
+      // Add first page
+      pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, contentHeight);
+      heightLeft -= pdfHeight;
+
+      // Add subsequent pages if necessary
+      while (heightLeft >= 0) {
+        position = heightLeft - contentHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, contentHeight);
+        heightLeft -= pdfHeight;
+      }
+
+      pdf.save('Abenezer_Mulatu_Portfolio.pdf');
+      toast.success('Portfolio downloaded!', { id: toastId });
+    } catch (error) {
+      console.error('PDF Error:', error);
+      toast.error('Failed to generate PDF. Please try again.', { id: toastId });
+    }
   };
 
   const name = "Abenezer Mulatu";
@@ -45,10 +113,10 @@ function App() {
   ];
 
   return (
-    <div className="app-shell">
+    <div className="app-shell" ref={portfolioRef}>
       <Toaster position="top-right" />
 
-      {/* Floating Social Toolbar (Desktop) moved to its own component or simplified */}
+      {/* Floating Social Toolbar (Desktop) */}
       <div className="floating-socials hidden lg:flex">
         <div className="social-rack glass-card p-2 flex flex-col gap-4">
           {socialIcons.slice(0, 3).map((s, i) => (
@@ -123,13 +191,13 @@ function App() {
           >
             <span className="text-primary font-bold tracking-widest text-xs mb-4 block uppercase underline underline-offset-8">Abenezer Mulatu</span>
             <h1 className="headline-huge mb-6">
-              Full-Stack <br />
-              <span className="stroke-text">Developer</span>
+              Building Scalable <br />
+              <span className="stroke-text">Web Apps</span>
             </h1>
 
             <p className="hero-description mb-8 text-muted max-w-xl">
-              Specialized in crafting high-performance e-commerce ecosystems and
-              highly-secure database architectures. Lead developer at **Kudeja Trading PLC**.
+              I help startups and businesses build fast, secure e-commerce ecosystems and 
+              high-performance architectures. **5,000+ clients** served through Kudeja Trading PLC.
             </p>
 
             <div className="social-links-row mb-12 flex flex-wrap gap-4 items-center">
@@ -152,26 +220,23 @@ function App() {
               <a href="#contact" className="btn-pill btn-pill-solid">
                 Hire Me <ChevronRight size={18} />
               </a>
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  toast.error("CV is being updated. Please check back soon!");
-                }}
-                className="btn-pill btn-pill-outline"
-              >
-                Download CV
+              <a href="#projects" className="btn-pill btn-pill-outline">
+                See My Work
               </a>
             </div>
 
             <div className="stats-row flex flex-wrap gap-6">
               <div className="stat-box">
-                <span className="stat-value">4+</span>
-                <span className="stat-label">Years of Dev</span>
+                <span className="stat-value">5k+</span>
+                <span className="stat-label">Clients Served</span>
               </div>
               <div className="stat-box">
-                <span className="stat-value">20+</span>
-                <span className="stat-label">Projects Built</span>
+                <span className="stat-value">$5/hr</span>
+                <span className="stat-label">Starting Rate</span>
+              </div>
+              <div className="stat-box">
+                <span className="stat-value">24h</span>
+                <span className="stat-label">Response Time</span>
               </div>
             </div>
           </motion.div>
@@ -207,6 +272,14 @@ function App() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
       >
+        <Pricing />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+      >
         <ContactForm socialLinks={socialLinks} />
       </motion.div>
 
@@ -227,5 +300,60 @@ function App() {
     </div>
   );
 }
+
+const Pricing = () => {
+  const packages = [
+    {
+      name: "Standard Dev",
+      price: "$5/hr",
+      features: ["Full-Stack Development", "PostgreSQL Optimization", "24h Response Time", "Git Version Control"],
+      highlight: false
+    },
+    {
+      name: "Enterprise Solution",
+      price: "Custom",
+      features: ["E-commerce Ecosystems", "Logistic Systems", "High-Scale Architecture", "Priority Support"],
+      highlight: true
+    }
+  ];
+
+  return (
+    <section className="pricing-section py-24 bg-primary/5">
+      <div className="container">
+        <div className="text-center mb-16">
+          <span className="text-primary font-bold tracking-widest text-xs uppercase mb-4 block underline underline-offset-8">Investment</span>
+          <h2 className="text-4xl font-extrabold mb-4">Transparent Pricing</h2>
+          <p className="text-muted max-w-xl mx-auto">Scalable solutions for every budget, from hourly consulting to full-scale enterprise systems.</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {packages.map((pkg, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ y: -10 }}
+              className={`glass-card p-10 border ${pkg.highlight ? 'border-primary' : 'border-white/10'} relative overflow-hidden`}
+            >
+              {pkg.highlight && <div className="absolute top-0 right-0 bg-primary text-white text-[10px] font-black px-4 py-1 uppercase tracking-widest">Recommended</div>}
+              <h3 className="text-xl font-bold mb-2">{pkg.name}</h3>
+              <div className="flex items-baseline gap-2 mb-8">
+                <span className="text-4xl font-black text-primary">{pkg.price}</span>
+                <span className="text-xs text-muted font-bold uppercase tracking-widest">{pkg.price === 'Custom' ? '' : '/ hour'}</span>
+              </div>
+              <ul className="space-y-4 mb-10">
+                {pkg.features.map((feat, j) => (
+                  <li key={j} className="flex items-center gap-3 text-sm text-muted">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                    {feat}
+                  </li>
+                ))}
+              </ul>
+              <a href="#contact" className={`btn-pill w-full justify-center ${pkg.highlight ? 'btn-pill-solid' : 'btn-pill-outline'}`}>Get Started</a>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default App;

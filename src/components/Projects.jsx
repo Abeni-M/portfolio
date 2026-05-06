@@ -9,22 +9,32 @@ import './Projects.css';
 const Projects = () => {
   const projectList = [
     {
-      title: 'Kudeja Platform',
-      type: 'E-commerce & Property',
+      title: 'Kudeja Enterprise Platform',
+      type: 'E-commerce & Logistics',
       tech: ['React', 'Node.js', 'PostgreSQL', 'Socket.io'],
-      description: 'Lead developer for a massive multi-vendor ecosystem. Architected the core relational database to handle high-concurrency transactions and real-time ad placement.',
+      description: 'Lead architect for a multi-vendor ecosystem handling thousands of daily transactions. Implemented real-time inventory tracking and secure payment gateways.',
+      result: 'Handled 5,000+ active clients with 99.9% uptime.',
       image: kudejaImg,
-      links: { github: '#', live: '#' }
+      links: { github: 'https://github.com/Abeni-M', live: 'https://kudeja.com' }
     },
     {
-      title: 'Video editing',
-      type: 'Video editing',
-      tech: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
-      description: 'Video editing platform',
+      title: 'Global Brand Visuals',
+      type: 'Media Production',
+      tech: ['Adobe Premiere', 'After Effects', 'Photoshop'],
+      description: 'High-end video production and motion graphics for corporate clients. Developed automated rendering workflows for consistent brand storytelling.',
+      result: 'Automated 60% of video rendering workflows.',
       image: videoEditingImg,
       links: { github: '#', live: '#' }
     },
-
+    {
+      title: 'DBU Daily Service',
+      type: 'University Portal',
+      tech: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
+      description: 'A campus-wide notification and service management portal for Debre Berhan University, serving students with real-time updates.',
+      result: 'Serving 10,000+ students daily.',
+      image: 'https://images.unsplash.com/photo-1523050335392-938511794244?auto=format&fit=crop&q=80&w=800',
+      links: { github: '#', live: '#' }
+    }
   ];
 
   return (
@@ -63,9 +73,15 @@ const Projects = () => {
                   <Layers size={14} className="text-muted" strokeWidth={3} />
                 </div>
                 <h3 className="text-xl font-bold mb-4">{project.title}</h3>
-                <p className="text-muted text-sm leading-relaxed mb-8 flex-grow">
+                <p className="text-muted text-sm leading-relaxed mb-4 flex-grow">
                   {project.description}
                 </p>
+                {project.result && (
+                  <div className="project-result bg-primary/5 p-3 rounded-lg border border-primary/10 mb-8">
+                    <span className="text-primary text-[10px] font-black uppercase block mb-1">Impact / Result</span>
+                    <p className="text-xs font-bold">{project.result}</p>
+                  </div>
+                )}
                 <div className="project-footer flex justify-between items-center mt-auto pt-6 border-t border-border">
                   <div className="tech-tags flex gap-2">
                     {project.tech.slice(0, 2).map((t, i) => (
