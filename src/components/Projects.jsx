@@ -27,15 +27,6 @@ const Projects = () => {
       result: 'Automated 60% of video rendering workflows.',
       image: videoEditingImg,
       links: { github: '#', live: '#' }
-    },
-    {
-      title: 'DBU Daily Service',
-      type: 'University Portal',
-      tech: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
-      description: 'A campus-wide notification and service management portal for Debre Berhan University, serving students with real-time updates.',
-      result: 'Serving 10,000+ students daily.',
-      image: 'https://images.unsplash.com/photo-1523050335392-938511794244?auto=format&fit=crop&q=80&w=800',
-      links: { github: '#', live: '#' }
     }
   ];
 
