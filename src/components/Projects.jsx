@@ -27,6 +27,15 @@ const Projects = () => {
       result: 'Automated 60% of video rendering workflows.',
       image: videoEditingImg,
       links: { github: '#', live: '#' }
+    },
+    {
+      title: 'Nexus API Gateway',
+      type: 'Backend Infrastructure',
+      tech: ['Node.js', 'Redis', 'Docker', 'TypeScript'],
+      description: 'Engineered a high-performance API gateway designed for high-concurrency traffic. Implemented distributed rate-limiting using Redis, JWT-based authentication, and dynamic request routing.',
+      result: 'Reduced average API latency by 35% through intelligent caching.',
+      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80&w=800',
+      links: { github: 'https://github.com/Abeni-M', live: '#' }
     }
   ];
 
