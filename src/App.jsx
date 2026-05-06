@@ -272,6 +272,14 @@ function App() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
       >
+        <ProjectSpotlight />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+      >
         <Pricing />
       </motion.div>
 
@@ -300,6 +308,33 @@ function App() {
     </div>
   );
 }
+
+import kudejaHeroSite from './assets/kudeja-hero-site.png';
+
+const ProjectSpotlight = () => {
+  return (
+    <section className="spotlight-section py-24 overflow-hidden">
+      <div className="container">
+        <div className="glass-card p-1 md:p-4 overflow-hidden relative group">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+          <div className="absolute bottom-12 left-12 z-20 translate-y-10 group-hover:translate-y-0 transition-transform duration-700 opacity-0 group-hover:opacity-100">
+            <span className="text-primary font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Case Study Spotlight</span>
+            <h2 className="text-4xl font-black mb-6">Kudeja Trading PLC <br />Digital Transformation</h2>
+            <p className="text-muted max-w-lg mb-8">From a traditional trading company to a modern digital marketplace. We built a system that bridges international supply with local demand.</p>
+            <a href="https://kudeja.com" target="_blank" rel="noreferrer" className="btn-pill btn-pill-solid">View Live Platform</a>
+          </div>
+          <motion.img 
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 1.5 }}
+            src={kudejaHeroSite} 
+            alt="Kudeja Spotlight" 
+            className="w-full h-auto rounded-xl shadow-2xl"
+          />
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const Pricing = () => {
   const packages = [

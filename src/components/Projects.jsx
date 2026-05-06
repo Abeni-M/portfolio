@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Database, Layers, ArrowRight } from 'lucide-react';
 import kudejaImg from '../assets/kudeja-preview.png';
+import kudejaHeroImg from '../assets/kudeja-hero-site.png';
 import videoEditingImg from '../assets/video-editing-preview.png';
 
 import './Projects.css';
@@ -15,6 +16,7 @@ const Projects = () => {
       description: 'Lead architect for a multi-vendor ecosystem handling thousands of daily transactions. Implemented real-time inventory tracking and secure payment gateways.',
       result: 'Handled 5,000+ active clients with 99.9% uptime.',
       image: kudejaImg,
+      gallery: [kudejaHeroImg, kudejaImg],
       links: { github: 'https://github.com/Abeni-M', live: 'https://kudeja.com' }
     },
     {
@@ -59,6 +61,13 @@ const Projects = () => {
             >
               <div className="project-preview relative overflow-hidden group h-64">
                 <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                
+                {project.gallery && (
+                  <div className="gallery-indicator absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest flex items-center gap-2">
+                    <Layers size={10} className="text-primary" /> Multi-Page Case Study
+                  </div>
+                )}
+
                 <div className="project-overlay absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex-center">
                   <div className="flex gap-4">
                     <a href={project.links.live} className="p-3 bg-white text-primary rounded-full hover:scale-110 transition-transform"><ExternalLink size={20} /></a>
