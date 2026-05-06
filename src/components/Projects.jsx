@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ExternalLink, Github, Database, Layers, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Github, Database, Layers, ArrowRight, X, Info } from 'lucide-react';
 import kudejaImg from '../assets/kudeja-preview.png';
 import kudejaHeroImg from '../assets/kudeja-hero-site.png';
 import videoEditingImg from '../assets/video-editing-preview.png';
@@ -39,6 +39,8 @@ const Projects = () => {
     }
   ];
 
+  const [selectedProject, setSelectedProject] = useState(null);
+
   return (
     <section id="projects" className="projects-premium">
       <div className="container">
@@ -57,9 +59,10 @@ const Projects = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="glass-card project-card-premium overflow-hidden flex flex-col"
+              onClick={() => setSelectedProject(project)}
+              className="glass-card project-card-premium overflow-hidden flex flex-col cursor-pointer group"
             >
-              <div className="project-preview relative overflow-hidden group h-64">
+              <div className="project-preview relative overflow-hidden h-64">
                 <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 
                 {project.gallery && (
@@ -68,11 +71,10 @@ const Projects = () => {
                   </div>
                 )}
 
-                <div className="project-overlay absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex-center">
-                  <div className="flex gap-4">
-                    <a href={project.links.live} className="p-3 bg-white text-primary rounded-full hover:scale-110 transition-transform"><ExternalLink size={20} /></a>
-                    <a href={project.links.github} className="p-3 bg-white text-primary rounded-full hover:scale-110 transition-transform"><Github size={20} /></a>
-                  </div>
+                <div className="project-overlay absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex-center">
+                   <div className="p-4 bg-white/10 backdrop-blur-md rounded-full text-white">
+                      <Info size={24} />
+                   </div>
                 </div>
               </div>
 
@@ -82,7 +84,7 @@ const Projects = () => {
                   <Layers size={14} className="text-muted" strokeWidth={3} />
                 </div>
                 <h3 className="text-xl font-bold mb-4">{project.title}</h3>
-                <p className="text-muted text-sm leading-relaxed mb-4 flex-grow">
+                <p className="text-muted text-sm leading-relaxed mb-4 flex-grow line-clamp-3">
                   {project.description}
                 </p>
                 {project.result && (
@@ -97,15 +99,86 @@ const Projects = () => {
                       <span key={i} className="text-[10px] font-bold text-muted uppercase">{t}</span>
                     ))}
                   </div>
-                  <a href={project.links.live} className="text-primary flex items-center gap-2 text-xs font-bold hover:gap-4 transition-all">
-                    View Project <ArrowRight size={14} />
-                  </a>
+                  <span className="text-primary flex items-center gap-2 text-xs font-bold group-hover:gap-4 transition-all">
+                    View Details <ArrowRight size={14} />
+                  </span>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
+
+      {/* Project Detail Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <div className="fixed inset-0 z-[2000] flex-center p-4 md:p-10">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedProject(null)}
+              className="absolute inset-0 bg-black/90 backdrop-blur-xl"
+            ></motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="glass-card w-full max-w-5xl max-h-[90vh] overflow-y-auto relative z-10 p-6 md:p-12 border-white/10"
+            >
+              <button 
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-full transition-colors"
+              >
+                <X size={24} />
+              </button>
+
+              <div className="grid lg:grid-cols-2 gap-12">
+                <div className="space-y-8">
+                  <div>
+                    <span className="text-primary font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">{selectedProject.type}</span>
+                    <h2 className="text-4xl font-black mb-6">{selectedProject.title}</h2>
+                    <p className="text-muted leading-relaxed text-lg">{selectedProject.description}</p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h4 className="font-bold text-sm uppercase tracking-widest text-primary">Key Results</h4>
+                    <div className="bg-primary/10 p-6 rounded-2xl border border-primary/20">
+                      <p className="text-xl font-bold">{selectedProject.result}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3">
+                    {selectedProject.tech.map((t, i) => (
+                      <span key={i} className="px-4 py-2 bg-white/5 rounded-full text-xs font-bold border border-white/5">{t}</span>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-4 pt-6">
+                    <a href={selectedProject.links.live} target="_blank" rel="noreferrer" className="btn-pill btn-pill-solid">
+                      Live Preview <ExternalLink size={18} />
+                    </a>
+                    <a href={selectedProject.links.github} target="_blank" rel="noreferrer" className="btn-pill btn-pill-outline">
+                      View Code <Github size={18} />
+                    </a>
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  {selectedProject.gallery ? (
+                    selectedProject.gallery.map((img, i) => (
+                      <img key={i} src={img} alt="Gallery" className="w-full rounded-2xl shadow-2xl border border-white/5" />
+                    ))
+                  ) : (
+                    <img src={selectedProject.image} alt="Preview" className="w-full rounded-2xl shadow-2xl border border-white/5" />
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
