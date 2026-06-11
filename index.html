@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Primary Meta Tags -->
-  <title>Abenezer Mulatu | </title>
-  <meta name="title" content="Abenezer Mulatu |" />
+  <title>Abenezer Mulatu | Lead Full-Stack Developer & Digital Solutions Architect</title>
+  <meta name="title" content="Abenezer Mulatu | Digital Solutions Architect" />
   <meta name="description"
     content="I build fast, scalable web apps and high-performance e-commerce ecosystems for startups and growing businesses. 5,000+ clients served." />
   <meta name="keywords"
@@ -21,7 +21,7 @@
   <meta property="og:title" content="Abenezer Mulatu | Digital Solutions Architect" />
   <meta property="og:description"
     content="Delivering high-performance web applications and e-commerce ecosystems that scale." />
-  <meta property="og:image" content="/og-image.png" />
+  <meta property="og:image" content="./assets/kudeja-preview.png" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
@@ -29,26 +29,816 @@
   <meta property="twitter:title" content="Abenezer Mulatu | Digital Solutions Architect" />
   <meta property="twitter:description"
     content="Delivering high-performance web applications and e-commerce ecosystems that scale." />
-  <meta property="twitter:image" content="/og-image.png" />
+  <meta property="twitter:image" content="./assets/kudeja-preview.png" />
+
+  <!-- Font and Icon CDNs -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Third-Party Library CDNs -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <!-- CSS Framework (Tailwind CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: 'var(--primary)',
+            'bg-deep': 'var(--bg-deep)',
+            'bg-card': 'var(--bg-card)',
+            'text-main': 'var(--text-main)',
+            'text-muted': 'var(--text-muted)',
+            border: 'var(--border)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/style.css" />
+  
+  <!-- Toast styling helper -->
+  <style>
+    .toast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 5000;
+      background: rgba(12, 12, 14, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 1rem 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .toast.success {
+      border-left: 4px solid #10b981;
+    }
+    .toast.error {
+      border-left: 4px solid #ef4444;
+    }
+    .toast.info {
+      border-left: 4px solid var(--primary);
+    }
+  </style>
 </head>
 
 <body>
-  <div id="root">
-    <!-- Static content for SEO and No-JS users -->
-    <header style="display:none;">
-      <h1>Abenezer Mulatu</h1>
-      <h2>Senior Full-Stack Developer & Digital Solutions Architect</h2>
-      <p>I build fast, scalable web apps and high-performance e-commerce ecosystems. 5,000+ clients served.</p>
-    </header>
+  <!-- Custom Toast Notification -->
+  <div id="toast-notification" class="toast info">
+    <i id="toast-icon" data-lucide="info" class="text-primary"></i>
+    <span id="toast-message">Message here...</span>
   </div>
-  <noscript>
-    <div style="padding: 20px; text-align: center; font-family: sans-serif;">
-      <h1>Abenezer Mulatu | Digital Solutions Architect</h1>
-      <p>Please enable JavaScript to view my full portfolio and interactive experiences.</p>
-      <p>Contact: <a href="mailto:abenezermulatu41@gmail.com">abenezermulatu41@gmail.com</a></p>
+
+  <div class="app-shell" id="portfolio-container">
+    
+    <!-- Floating Social Toolbar (Desktop) -->
+    <div class="floating-socials hidden lg:flex">
+      <div class="social-rack glass-card p-2 flex flex-col gap-4">
+        <a href="https://github.com/Abeni-M" target="_blank" rel="noopener noreferrer" class="rack-icon" style="color: #ffffff;" aria-label="GitHub"><i class="fa-brands fa-github text-lg"></i></a>
+        <a href="https://www.linkedin.com/in/abenezer-mulatu-b42595381" target="_blank" rel="noopener noreferrer" class="rack-icon" style="color: #0077b5;" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in text-lg"></i></a>
+        <a href="https://t.me/Abe_m_1" target="_blank" rel="noopener noreferrer" class="rack-icon" style="color: #0088cc;" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg"></i></a>
+        <div class="rack-line"></div>
+        <span class="rack-text tracking-widest uppercase">Connect</span>
+      </div>
     </div>
-  </noscript>
-  <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Premium Navbar -->
+    <nav class="premium-nav">
+      <div class="container nav-content">
+        <div class="logo-text">
+          Abenezer<span class="text-primary">.</span>
+        </div>
+        
+        <div class="nav-links">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#experience" class="nav-link">Experience</a>
+          <a href="#projects" class="nav-link">Portfolio</a>
+          <a href="#contact" class="btn-pill btn-pill-solid px-6 py-2 h-auto text-[10px] font-black">Let's Talk</a>
+          <button id="theme-toggle-btn" class="btn-outline flex-center" style="width: 40px; height: 40px; padding: 0; border-radius: 50%;" aria-label="Toggle Theme">
+            <i data-lucide="sun" class="text-primary hidden theme-icon-sun"></i>
+            <i data-lucide="moon" class="text-primary hidden theme-icon-moon"></i>
+          </button>
+        </div>
+
+        <button id="mobile-menu-btn" class="mobile-menu-toggle lg:hidden" aria-label="Toggle Navigation Menu">
+          <i data-lucide="menu" size="28" class="menu-icon-hamburger"></i>
+          <i data-lucide="x" size="28" class="menu-icon-close hidden"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Overlay -->
+      <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+        <div class="mobile-links">
+          <a href="#about" class="mobile-nav-item">About</a>
+          <a href="#experience" class="mobile-nav-item">Experience</a>
+          <a href="#projects" class="mobile-nav-item">Portfolio</a>
+          <a href="#contact" class="mobile-nav-item btn-pill btn-pill-solid mt-4 text-center">Let's Talk</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Split Hero Section -->
+    <header class="hero-split">
+      <div class="container hero-grid">
+        
+        <!-- Photo Column (Prioritized visually for mobile) -->
+        <div class="hero-right flex-center reveal-on-scroll">
+          <div class="profile-circle-wrap">
+            <div class="profile-glow"></div>
+            <div class="profile-avatar-container">
+              <img src="./assets/profile.jpg" alt="Abenezer Mulatu" class="hero-avatar-img" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Headline Column -->
+        <div class="hero-left reveal-on-scroll">
+          <span class="text-primary font-bold tracking-widest text-xs mb-4 block uppercase underline underline-offset-8">Abenezer Mulatu</span>
+          <h1 class="headline-huge mb-6">
+            Building Scalable <br />
+            <span class="stroke-text">Web Apps</span>
+          </h1>
+
+          <p class="hero-description mb-8 text-muted max-w-xl">
+            I help startups and businesses build fast, secure e-commerce ecosystems and 
+            high-performance architectures. <span class="text-primary font-bold">5,000+ clients</span> served through Kudeja Trading PLC.
+          </p>
+
+          <!-- Social links (for mobile and tablet visibility) -->
+          <div class="social-links-row mb-12 flex flex-wrap gap-4 items-center">
+            <a href="https://github.com/Abeni-M" target="_blank" rel="noopener noreferrer" class="social-pill glass-card flex items-center gap-2 px-4 py-2" style="--hover-color: #ffffff;" aria-label="GitHub">
+              <i class="fa-brands fa-github text-lg" style="color: #ffffff;"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/abenezer-mulatu-b42595381" target="_blank" rel="noopener noreferrer" class="social-pill glass-card flex items-center gap-2 px-4 py-2" style="--hover-color: #0077b5;" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in text-lg" style="color: #0077b5;"></i>
+            </a>
+            <a href="https://t.me/Abe_m_1" target="_blank" rel="noopener noreferrer" class="social-pill glass-card flex items-center gap-2 px-4 py-2" style="--hover-color: #0088cc;" aria-label="Telegram">
+              <i class="fa-brands fa-telegram text-lg" style="color: #0088cc;"></i>
+            </a>
+            <a href="https://www.instagram.com/abe_ne_zer_m?igsh=MWhxc2JqcGJpZTN0ag==" target="_blank" rel="noopener noreferrer" class="social-pill glass-card flex items-center gap-2 px-4 py-2" style="--hover-color: #e4405f;" aria-label="Instagram">
+              <i class="fa-brands fa-instagram text-lg" style="color: #e4405f;"></i>
+            </a>
+            <a href="https://www.facebook.com/abenezer.mulatu.37" target="_blank" rel="noopener noreferrer" class="social-pill glass-card flex items-center gap-2 px-4 py-2" style="--hover-color: #1877f2;" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f text-lg" style="color: #1877f2;"></i>
+            </a>
+          </div>
+
+          <div class="hero-cta mb-16 flex flex-wrap gap-4">
+            <a href="#contact" class="btn-pill btn-pill-solid">
+              Hire Me <i data-lucide="chevron-right" size="18"></i>
+            </a>
+            <a href="#projects" class="btn-pill btn-pill-outline">
+              See My Work
+            </a>
+            <button id="download-pdf-btn" class="btn-pill btn-pill-outline gap-2 bg-primary/5 hover:bg-primary/15 border-primary/20 hover:border-primary/50 text-xs py-3 px-6 rounded-full font-bold uppercase transition-all">
+              <i data-lucide="download" size="14" class="text-primary"></i> Download Portfolio
+            </button>
+          </div>
+
+          <div class="stats-row flex flex-wrap gap-6">
+            <div class="stat-box">
+              <span class="stat-value">5k+</span>
+              <span class="stat-label">Clients Served</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value">$35/hr</span>
+              <span class="stat-label">Starting Rate</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value">24h</span>
+              <span class="stat-label">Response Time</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about-premium reveal-on-scroll">
+      <div class="container">
+        <div class="about-grid-premium">
+          
+          <!-- Services Column -->
+          <div class="services-column">
+            <span class="text-primary font-bold tracking-widest text-xs uppercase mb-6 block">What I Do</span>
+            <div class="services-list">
+              
+              <div class="service-item glass-card p-6 mb-4 flex items-start gap-4 transition-all hover:translate-x-2">
+                <div class="service-icon text-primary mt-1"><i data-lucide="zap" size="24"></i></div>
+                <div>
+                  <h4 class="font-bold mb-1">Conversion-Focused E-commerce</h4>
+                  <p class="text-sm text-muted">Building marketplaces that handle 5,000+ daily clients with seamless checkout and inventory logic.</p>
+                </div>
+              </div>
+              
+              <div class="service-item glass-card p-6 mb-4 flex items-start gap-4 transition-all hover:translate-x-2">
+                <div class="service-icon text-primary mt-1"><i data-lucide="code" size="24"></i></div>
+                <div>
+                  <h4 class="font-bold mb-1">Scalable SaaS Architecture</h4>
+                  <p class="text-sm text-muted">Architecting Node.js & PostgreSQL systems designed to grow from 100 to 100k users without friction.</p>
+                </div>
+              </div>
+              
+              <div class="service-item glass-card p-6 mb-4 flex items-start gap-4 transition-all hover:translate-x-2">
+                <div class="service-icon text-primary mt-1"><i data-lucide="database" size="24"></i></div>
+                <div>
+                  <h4 class="font-bold mb-1">High-Performance Databases</h4>
+                  <p class="text-sm text-muted">Optimizing PostgreSQL queries and structures for sub-second response times in high-traffic apps.</p>
+                </div>
+              </div>
+              
+              <div class="service-item glass-card p-6 mb-4 flex items-start gap-4 transition-all hover:translate-x-2">
+                <div class="service-icon text-primary mt-1"><i data-lucide="shield" size="24"></i></div>
+                <div>
+                  <h4 class="font-bold mb-1">Infrastructure & Security</h4>
+                  <p class="text-sm text-muted">Ensuring 99.9% uptime and bulletproof security for your business-critical digital platforms.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Biography Column -->
+          <div class="bio-column">
+            <span class="text-primary font-bold tracking-widest text-xs uppercase mb-6 block">The Digital Architect</span>
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-8">Bridging Code <br />& Creativity</h2>
+            <div class="bio-text text-muted space-y-6">
+              <p>
+                I thrive at the intersection of technical precision and
+                creative vision. My journey in technology is driven by a
+                dual passion for high-performance coding and cinematic
+                storytelling. To me, a database is the foundation, but the user
+                experience is the story.
+              </p>
+              <p>
+                As the Lead Developer and Administrator at Kudeja,
+                I spearheaded the creation of a sophisticated digital marketplace.
+                From architecting complex ordering systems to managing real-time
+                inventory, I've built a platform where thousands of clients can
+                interact and transact seamlessly.
+              </p>
+              <p>
+                My creative background in video editing isn't
+                just a hobby—it's my edge. It allows me to
+                approach UI/UX with a director's eye for detail,
+                ensuring every digital product I build is as visually
+                stunning as it is technically sound. My ultimate goal is
+                to build a pioneering company that sets new standards in
+                the digital tech landscape.
+              </p>
+              
+              <div class="testimonial-mini glass-card p-6 mt-10 border-l-4 border-primary">
+                <p class="italic text-sm mb-4">
+                  "Kudeja Trading PLC was very happy with the project Abenezer delivered. He handled our ecosystem of 5,000+ clients with exceptional technical skill."
+                </p>
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-primary/20 flex-center text-[10px] font-bold">KT</div>
+                  <div>
+                    <span class="block text-xs font-bold text-text-main">Management Team</span>
+                    <span class="text-[10px] text-muted">Kudeja Trading PLC</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stats-mini flex gap-8 mt-10">
+                <div class="mini-stat">
+                  <i data-lucide="zap" class="text-primary mb-2" size="20"></i>
+                  <span class="block font-bold text-text-main">99.9%</span>
+                  <span class="text-xs">System Uptime</span>
+                </div>
+                <div class="mini-stat">
+                  <i data-lucide="shield" class="text-primary mb-2" size="20"></i>
+                  <span class="block font-bold text-text-main">Secure</span>
+                  <span class="text-xs">Enterprise Grade</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech Stack Section -->
+        <div class="mt-24">
+          <div class="text-center mb-12">
+            <span class="text-primary font-bold tracking-widest text-xs uppercase mb-4 block underline underline-offset-8">My Arsenal</span>
+            <h2 class="text-4xl font-extrabold mb-6">Technologies & Tools</h2>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            <div class="tech-card glass-card p-4 text-center">
+              <div class="text-sm font-bold mb-1">React</div>
+              <div class="text-[10px] text-primary uppercase font-black tracking-widest opacity-60">Expert</div>
+            </div>
+            <div class="tech-card glass-card p-4 text-center">
+              <div class="text-sm font-bold mb-1">Node.js</div>
+              <div class="text-[10px] text-primary uppercase font-black tracking-widest opacity-60">Advanced</div>
+            </div>
+            <div class="tech-card glass-card p-4 text-center">
+              <div class="text-sm font-bold mb-1">PostgreSQL</div>
+              <div class="text-[10px] text-primary uppercase font-black tracking-widest opacity-60">Expert</div>
+            </div>
+            <div class="tech-card glass-card p-4 text-center">
+              <div class="text-sm font-bold mb-1">Python</div>
+              <div class="text-[10px] text-primary uppercase font-black tracking-widest opacity-60">Intermediate</div>
+            </div>
+            <div class="tech-card glass-card p-4 text-center">
+              <div class="text-sm font-bold mb-1">Adobe Premiere</div>
+              <div class="text-[10px] text-primary uppercase font-black tracking-widest opacity-60">Professional</div>
+            </div>
+            <div class="tech-card glass-card p-4 text-center">
+              <div class="text-sm font-bold mb-1">After Effects</div>
+              <div class="text-[10px] text-primary uppercase font-black tracking-widest opacity-60">Advanced</div>
+            </div>
+            <div class="tech-card glass-card p-4 text-center">
+              <div class="text-sm font-bold mb-1">Docker</div>
+              <div class="text-[10px] text-primary uppercase font-black tracking-widest opacity-60">Intermediate</div>
+            </div>
+            <div class="tech-card glass-card p-4 text-center">
+              <div class="text-sm font-bold mb-1">AWS</div>
+              <div class="text-[10px] text-primary uppercase font-black tracking-widest opacity-60">Advanced</div>
+            </div>
+            <div class="tech-card glass-card p-4 text-center">
+              <div class="text-sm font-bold mb-1">Git</div>
+              <div class="text-[10px] text-primary uppercase font-black tracking-widest opacity-60">Expert</div>
+            </div>
+            <div class="tech-card glass-card p-4 text-center">
+              <div class="text-sm font-bold mb-1">TypeScript</div>
+              <div class="text-[10px] text-primary uppercase font-black tracking-widest opacity-60">Advanced</div>
+            </div>
+            <div class="tech-card glass-card p-4 text-center">
+              <div class="text-sm font-bold mb-1">Redis</div>
+              <div class="text-[10px] text-primary uppercase font-black tracking-widest opacity-60">Intermediate</div>
+            </div>
+            <div class="tech-card glass-card p-4 text-center">
+              <div class="text-sm font-bold mb-1">Figma</div>
+              <div class="text-[10px] text-primary uppercase font-black tracking-widest opacity-60">Intermediate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience-premium reveal-on-scroll">
+      <div class="container">
+        <div class="text-center mb-24">
+          <span class="text-primary font-bold tracking-widest text-xs uppercase mb-4 block underline underline-offset-8">My Career Path</span>
+          <h2 class="text-5xl md:text-6xl font-extrabold mb-8">Professional Journey</h2>
+          <p class="text-muted max-w-2xl mx-auto text-lg">
+            A timeline of academic excellence and professional leadership in software engineering.
+          </p>
+        </div>
+
+        <div class="experience-stack max-w-5xl mx-auto">
+          
+          <!-- Experience Card 1 -->
+          <div class="experience-record glass-card p-0 overflow-hidden mb-12">
+            <div class="record-header flex flex-col md:flex-row items-stretch border-b border-border">
+              <div class="record-type p-10 bg-primary/5 flex-center flex-col border-r border-border min-w-[160px]">
+                <i data-lucide="briefcase" class="text-primary mb-3" size="32"></i>
+                <span class="text-[10px] font-black uppercase text-primary tracking-[0.2em]">Work</span>
+              </div>
+              <div class="record-title-area p-8 md:p-10 flex-grow">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                  <div>
+                    <h3 class="text-2xl md:text-3xl font-bold mb-2">Lead Developer & System Administrator</h3>
+                    <p class="text-primary text-lg font-bold tracking-wide flex items-center gap-2">Kudeja Trading PLC</p>
+                  </div>
+                  <div class="bg-primary/10 px-4 py-2 rounded-full border border-primary/20">
+                    <span class="text-sm font-bold text-primary flex items-center gap-2">
+                      <i data-lucide="calendar" size="14"></i> Jan 2024 - Present
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="record-body p-8 md:p-10 flex flex-col lg:flex-row gap-12 text-left">
+              <div class="lg:w-2/3">
+                <p class="text-muted text-lg leading-relaxed mb-8">
+                  Architecting and managing a high-scale digital marketplace. Developed a seamless client ordering system and multi-vendor ecosystem, focusing on high-concurrency PostgreSQL performance and secure digital infrastructure.
+                </p>
+                <div class="flex items-center gap-3 text-sm text-muted font-bold">
+                  <i data-lucide="map-pin" size="16" class="text-primary"></i> Addis Ababa, Ethiopia
+                </div>
+              </div>
+              <div class="lg:w-1/3">
+                <span class="text-[10px] font-black uppercase text-muted tracking-widest mb-6 block">Core Competencies</span>
+                <div class="flex flex-wrap gap-3">
+                  <span class="skill-badge">Marketplace Logic</span>
+                  <span class="skill-badge">PostgreSQL</span>
+                  <span class="skill-badge">Node.js</span>
+                  <span class="skill-badge">React</span>
+                  <span class="skill-badge">Cloud Security</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience Card 2 -->
+          <div class="experience-record glass-card p-0 overflow-hidden mb-12">
+            <div class="record-header flex flex-col md:flex-row items-stretch border-b border-border">
+              <div class="record-type p-10 bg-primary/5 flex-center flex-col border-r border-border min-w-[160px]">
+                <i data-lucide="check-square" class="text-primary mb-3" size="32"></i>
+                <span class="text-[10px] font-black uppercase text-primary tracking-[0.2em]">Education</span>
+              </div>
+              <div class="record-title-area p-8 md:p-10 flex-grow">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                  <div>
+                    <h3 class="text-2xl md:text-3xl font-bold mb-2">Computer Science Graduate (B.Sc.)</h3>
+                    <p class="text-primary text-lg font-bold tracking-wide flex items-center gap-2">Debre Berhan University</p>
+                  </div>
+                  <div class="bg-primary/10 px-4 py-2 rounded-full border border-primary/20">
+                    <span class="text-sm font-bold text-primary flex items-center gap-2">
+                      <i data-lucide="calendar" size="14"></i> 2021 - 2025
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="record-body p-8 md:p-10 flex flex-col lg:flex-row gap-12 text-left">
+              <div class="lg:w-2/3">
+                <p class="text-muted text-lg leading-relaxed mb-8">
+                  Specialized in Advanced Database Systems and Full-Stack Development. Focused on building scalable campus-wide notification engines and administrative data portals.
+                </p>
+                <div class="flex items-center gap-3 text-sm text-muted font-bold">
+                  <i data-lucide="map-pin" size="16" class="text-primary"></i> Debre Berhan, Ethiopia
+                </div>
+              </div>
+              <div class="lg:w-1/3">
+                <span class="text-[10px] font-black uppercase text-muted tracking-widest mb-6 block">Core Competencies</span>
+                <div class="flex flex-wrap gap-3">
+                  <span class="skill-badge">Algorithms</span>
+                  <span class="skill-badge">Software Architecture</span>
+                  <span class="skill-badge">PHP/MySQL</span>
+                  <span class="skill-badge">React</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-premium reveal-on-scroll">
+      <div class="container">
+        <div class="text-center mb-16">
+          <span class="text-primary font-bold tracking-widest text-xs uppercase mb-4 block underline underline-offset-8">My Portfolio</span>
+          <h2 class="text-5xl font-extrabold mb-6">Recent Work</h2>
+          <p class="text-muted max-w-2xl mx-auto">
+            A selection of software systems where architecture meets business logic.
+          </p>
+        </div>
+
+        <div class="projects-grid-premium">
+          
+          <!-- Project 1 Card -->
+          <div class="glass-card project-card-premium overflow-hidden flex flex-col cursor-pointer group" onclick="openProjectModal('kudeja')">
+            <div class="project-preview relative overflow-hidden h-64">
+              <img src="./assets/kudeja-preview.png" alt="Kudeja Enterprise Platform" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div class="gallery-indicator absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest flex items-center gap-2">
+                <i data-lucide="layers" size="10" class="text-primary"></i> Multi-Page Case Study
+              </div>
+              <div class="project-overlay absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex-center">
+                <div class="p-4 bg-white/10 backdrop-blur-md rounded-full text-white">
+                  <i data-lucide="info" size="24"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-8 flex flex-col flex-grow text-left">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-primary text-[10px] uppercase font-black tracking-widest">E-commerce & Logistics</span>
+                <i data-lucide="layers" size="14" class="text-muted" stroke-width="3"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-4">Kudeja Enterprise Platform</h3>
+              <p class="text-muted text-sm leading-relaxed mb-4 flex-grow line-clamp-3">
+                Lead architect for a multi-vendor ecosystem handling thousands of daily transactions. Implemented real-time inventory tracking and secure payment gateways.
+              </p>
+              <div class="project-result bg-primary/5 p-3 rounded-lg border border-primary/10 mb-8">
+                <span class="text-primary text-[10px] font-black uppercase block mb-1">Impact / Result</span>
+                <p class="text-xs font-bold text-text-main">Handled 5,000+ active clients with 99.9% uptime.</p>
+              </div>
+              <div class="project-footer flex justify-between items-center mt-auto pt-6 border-t border-border">
+                <div class="tech-tags flex gap-2">
+                  <span class="text-[10px] font-bold text-muted uppercase">React</span>
+                  <span class="text-[10px] font-bold text-muted uppercase">Node.js</span>
+                </div>
+                <span class="text-primary flex items-center gap-2 text-xs font-bold group-hover:gap-4 transition-all">
+                  View Details <i data-lucide="arrow-right" size="14"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 Card -->
+          <div class="glass-card project-card-premium overflow-hidden flex flex-col cursor-pointer group" onclick="openProjectModal('nexus')">
+            <div class="project-preview relative overflow-hidden h-64">
+              <img src="./assets/nexus api.jpeg" alt="Nexus API Gateway" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div class="project-overlay absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex-center">
+                <div class="p-4 bg-white/10 backdrop-blur-md rounded-full text-white">
+                  <i data-lucide="info" size="24"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-8 flex flex-col flex-grow text-left">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-primary text-[10px] uppercase font-black tracking-widest">Backend Infrastructure</span>
+                <i data-lucide="layers" size="14" class="text-muted" stroke-width="3"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-4">Nexus API Gateway</h3>
+              <p class="text-muted text-sm leading-relaxed mb-4 flex-grow line-clamp-3">
+                Engineered a high-performance API gateway designed for high-concurrency traffic. Implemented distributed rate-limiting using Redis, JWT-based authentication, and dynamic request routing.
+              </p>
+              <div class="project-result bg-primary/5 p-3 rounded-lg border border-primary/10 mb-8">
+                <span class="text-primary text-[10px] font-black uppercase block mb-1">Impact / Result</span>
+                <p class="text-xs font-bold text-text-main">Reduced average API latency by 35% through caching.</p>
+              </div>
+              <div class="project-footer flex justify-between items-center mt-auto pt-6 border-t border-border">
+                <div class="tech-tags flex gap-2">
+                  <span class="text-[10px] font-bold text-muted uppercase">Node.js</span>
+                  <span class="text-[10px] font-bold text-muted uppercase">Redis</span>
+                </div>
+                <span class="text-primary flex items-center gap-2 text-xs font-bold group-hover:gap-4 transition-all">
+                  View Details <i data-lucide="arrow-right" size="14"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study Spotlight Section -->
+    <section class="spotlight-section py-24 overflow-hidden reveal-on-scroll">
+      <div class="container">
+        <div class="glass-card p-1 md:p-4 overflow-hidden relative group">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+          <div class="absolute bottom-12 left-12 z-20 translate-y-10 group-hover:translate-y-0 transition-transform duration-700 opacity-0 group-hover:opacity-100 text-left">
+            <span class="text-primary font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Case Study Spotlight</span>
+            <h2 class="text-4xl font-black mb-6 text-white">Kudeja Trading PLC <br />Digital Transformation</h2>
+            <p class="text-slate-300 max-w-lg mb-8">From a traditional trading company to a modern digital marketplace. We built a system that bridges international supply with local demand.</p>
+            <a href="https://kudeja.com" target="_blank" rel="noreferrer" class="btn-pill btn-pill-solid">View Live Platform</a>
+          </div>
+          <img src="./assets/kudeja-hero-site.png" alt="Kudeja Spotlight" class="w-full h-auto rounded-xl shadow-2xl transition-transform duration-[1500ms] group-hover:scale-105" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section py-24 bg-primary/5 reveal-on-scroll">
+      <div class="container">
+        <div class="text-center mb-16">
+          <span class="text-primary font-bold tracking-widest text-xs uppercase mb-4 block underline underline-offset-8">Investment</span>
+          <h2 class="text-4xl font-extrabold mb-4">Transparent Pricing</h2>
+          <p class="text-muted max-w-xl mx-auto">Scalable solutions for startups and growing businesses. Hourly rate available at <span class="text-primary font-bold">$35–$50/hr</span>.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          
+          <!-- Package 1 -->
+          <div class="glass-card p-10 border border-white/10 relative overflow-hidden text-left">
+            <h3 class="text-xl font-bold mb-2">Launch Package</h3>
+            <div class="flex items-baseline gap-2 mb-8">
+              <span class="text-4xl font-black text-primary">$1,200</span>
+              <span class="text-xs text-muted font-bold uppercase tracking-widest">Fixed</span>
+            </div>
+            <ul class="space-y-4 mb-10">
+              <li class="flex items-center gap-3 text-sm text-muted">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                Custom Landing Page
+              </li>
+              <li class="flex items-center gap-3 text-sm text-muted">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                Essential SEO
+              </li>
+              <li class="flex items-center gap-3 text-sm text-muted">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                Performance Optimization
+              </li>
+              <li class="flex items-center gap-3 text-sm text-muted">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                2 Weeks Support
+              </li>
+            </ul>
+            <a href="#contact" class="btn-pill btn-pill-outline w-full justify-center text-center">Get Started</a>
+          </div>
+
+          <!-- Package 2 (Highlight) -->
+          <div class="glass-card p-10 border border-primary shadow-[0_0_30px_rgba(99,102,241,0.1)] relative overflow-hidden text-left">
+            <div class="absolute top-0 right-0 bg-primary text-white text-[10px] font-black px-4 py-1 uppercase tracking-widest">Most Popular</div>
+            <h3 class="text-xl font-bold mb-2">Growth Package</h3>
+            <div class="flex items-baseline gap-2 mb-8">
+              <span class="text-4xl font-black text-primary">$3,500</span>
+              <span class="text-xs text-muted font-bold uppercase tracking-widest">Fixed</span>
+            </div>
+            <ul class="space-y-4 mb-10">
+              <li class="flex items-center gap-3 text-sm text-muted">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                Full Web Application
+              </li>
+              <li class="flex items-center gap-3 text-sm text-muted">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                E-commerce Integration
+              </li>
+              <li class="flex items-center gap-3 text-sm text-muted">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                Advanced Dashboard
+              </li>
+              <li class="flex items-center gap-3 text-sm text-muted">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                1 Month Support
+              </li>
+            </ul>
+            <a href="#contact" class="btn-pill btn-pill-solid w-full justify-center text-center">Get Started</a>
+          </div>
+
+          <!-- Package 3 -->
+          <div class="glass-card p-10 border border-white/10 relative overflow-hidden text-left">
+            <h3 class="text-xl font-bold mb-2">Enterprise Build</h3>
+            <div class="flex items-baseline gap-2 mb-8">
+              <span class="text-4xl font-black text-primary">Custom</span>
+              <span class="text-xs text-muted font-bold uppercase tracking-widest">Quote</span>
+            </div>
+            <ul class="space-y-4 mb-10">
+              <li class="flex items-center gap-3 text-sm text-muted">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                High-Scale Architecture
+              </li>
+              <li class="flex items-center gap-3 text-sm text-muted">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                PostgreSQL Optimization
+              </li>
+              <li class="flex items-center gap-3 text-sm text-muted">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                AWS/Docker Deployment
+              </li>
+              <li class="flex items-center gap-3 text-sm text-muted">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                Priority 24/7 Support
+              </li>
+            </ul>
+            <a href="#contact" class="btn-pill btn-pill-outline w-full justify-center text-center">Get Started</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section-premium reveal-on-scroll">
+      <div class="container">
+        <div class="contact-grid-premium">
+          
+          <!-- Left Panel: Connections -->
+          <div class="contact-info-panel text-left">
+            <span class="text-primary font-bold tracking-widest text-xs uppercase mb-4 block">Connections</span>
+            <h2 class="text-4xl font-extrabold mb-8">Let's Connect</h2>
+            
+            <div class="location-card glass-card p-6 mb-6 flex items-center gap-4 border-l-4 border-primary">
+              <div class="icon-wrap bg-primary/10 text-primary p-3 rounded-xl">
+                <i data-lucide="loader-2" class="animate-pulse" size="24"></i>
+              </div>
+              <div>
+                <span class="block text-xs text-muted uppercase font-bold tracking-widest">Availability</span>
+                <span class="text-lg font-bold text-text-main">Always Available</span>
+                <span class="block text-[10px] text-primary font-black uppercase mt-1">Reply within 24 hours</span>
+              </div>
+            </div>
+
+            <div class="location-card glass-card p-6 mb-10 flex items-center gap-4">
+              <div class="icon-wrap bg-primary/10 text-primary p-3 rounded-xl">
+                <i data-lucide="map-pin" size="24"></i>
+              </div>
+              <div>
+                <span class="block text-xs text-muted uppercase font-bold tracking-widest">Base Location</span>
+                <span class="text-lg font-bold text-text-main">Addis Ababa, Ethiopia</span>
+              </div>
+            </div>
+
+            <!-- Horizontal Social Links -->
+            <div class="social-row-modern flex flex-wrap gap-4 mb-10">
+              <a href="https://www.linkedin.com/in/abenezer-mulatu-b42595381" target="_blank" rel="noopener noreferrer" class="social-icon-modern" style="color: #0077b5;" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in text-lg"></i>
+              </a>
+              <a href="https://github.com/Abeni-M" target="_blank" rel="noopener noreferrer" class="social-icon-modern" style="color: #ffffff;" aria-label="GitHub">
+                <i class="fa-brands fa-github text-lg"></i>
+              </a>
+              <a href="https://t.me/Abe_m_1" target="_blank" rel="noopener noreferrer" class="social-icon-modern" style="color: #0088cc;" aria-label="Telegram">
+                <i class="fa-brands fa-telegram text-lg"></i>
+              </a>
+              <a href="https://www.instagram.com/abe_ne_zer_m?igsh=MWhxc2JqcGJpZTN0ag==" target="_blank" rel="noopener noreferrer" class="social-icon-modern" style="color: #e4405f;" aria-label="Instagram">
+                <i class="fa-brands fa-instagram text-lg"></i>
+              </a>
+              <a href="https://www.facebook.com/abenezer.mulatu.37" target="_blank" rel="noopener noreferrer" class="social-icon-modern" style="color: #1877f2;" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f text-lg"></i>
+              </a>
+            </div>
+
+            <div class="email-direct mt-10">
+              <a href="mailto:abenezer@abenezer.me" class="flex items-center gap-3 text-muted hover:text-primary transition-colors">
+                <i data-lucide="mail" size="18"></i>
+                <span class="font-medium text-lg text-text-muted hover:text-primary transition-colors">abenezer@abenezer.me</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Panel: Form -->
+          <div class="contact-form-panel glass-card p-8 md:p-12 reveal-on-scroll">
+            <form id="portfolio-contact-form" class="form-premium">
+              <div class="form-row-premium">
+                <div class="form-group-premium">
+                  <label for="user_name">Your Name</label>
+                  <input type="text" id="user_name" name="user_name" placeholder="Abenezer Mulatu" required />
+                </div>
+                <div class="form-group-premium">
+                  <label for="user_email">Email Address</label>
+                  <input type="email" id="user_email" name="user_email" placeholder="example@gmail.com" required />
+                </div>
+              </div>
+
+              <div class="form-group-premium">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="Project Inquiry" required />
+              </div>
+
+              <div class="form-group-premium">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+              </div>
+
+              <button type="submit" id="submit-btn" class="btn-pill btn-pill-solid w-full justify-center py-4 text-base">
+                <span id="submit-spinner" class="hidden mr-2"><i data-lucide="loader-2" class="animate-spin" size="18"></i></span>
+                <span id="submit-icon" class="mr-2"><i data-lucide="send" size="18"></i></span>
+                <span id="submit-text">Send Message</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-premium reveal-on-scroll">
+      <div class="container text-center py-16 border-t border-border mt-12">
+        <p class="text-primary font-bold tracking-widest text-xs uppercase mb-8">Stay Connected</p>
+        <div class="flex justify-center gap-6 mb-12">
+          <a href="https://github.com/Abeni-M" target="_blank" rel="noopener noreferrer" class="social-footer-link" style="color: #ffffff;" aria-label="GitHub"><i class="fa-brands fa-github text-xl"></i></a>
+          <a href="https://www.linkedin.com/in/abenezer-mulatu-b42595381" target="_blank" rel="noopener noreferrer" class="social-footer-link" style="color: #0077b5;" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+          <a href="https://t.me/Abe_m_1" target="_blank" rel="noopener noreferrer" class="social-footer-link" style="color: #0088cc;" aria-label="Telegram"><i class="fa-brands fa-telegram text-xl"></i></a>
+          <a href="https://www.instagram.com/abe_ne_zer_m?igsh=MWhxc2JqcGJpZTN0ag==" target="_blank" rel="noopener noreferrer" class="social-footer-link" style="color: #e4405f;" aria-label="Instagram"><i class="fa-brands fa-instagram text-xl"></i></a>
+          <a href="https://www.facebook.com/abenezer.mulatu.37" target="_blank" rel="noopener noreferrer" class="social-footer-link" style="color: #1877f2;" aria-label="Facebook"><i class="fa-brands fa-facebook-f text-xl"></i></a>
+        </div>
+        <p class="text-[10px] text-muted/40 uppercase tracking-[0.3em]">
+          © <span id="current-year">2026</span> Abenezer Mulatu • Leading Innovation @ Kudeja
+        </p>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="scroll-to-top-btn" class="fixed bottom-8 right-8 z-[1002] p-4 bg-primary text-white rounded-full shadow-2xl transition-all duration-300 opacity-0 scale-50 pointer-events-none hover:scale-110 active:scale-95" aria-label="Back to Top">
+      <i data-lucide="chevron-up" size="24"></i>
+    </button>
+  </div>
+
+  <!-- Dynamic Project Detail Modal Container -->
+  <div id="project-detail-modal" class="modal-overlay">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="closeProjectModal()" aria-label="Close Case Study Modal">
+        <i data-lucide="x" size="24"></i>
+      </button>
+      <div id="modal-content-area">
+        <!-- Injected via javascript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom JavaScript -->
+  <script src="/script.js"></script>
 </body>
 
 </html>
