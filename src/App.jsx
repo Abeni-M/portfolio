@@ -280,14 +280,6 @@ function App() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
       >
-        <Pricing />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-      >
         <ContactForm socialLinks={socialLinks} />
       </motion.div>
 
@@ -336,68 +328,5 @@ const ProjectSpotlight = () => {
   );
 };
 
-const Pricing = () => {
-  const packages = [
-    {
-      name: "Launch Package",
-      price: "$1,200",
-      features: ["Custom Landing Page", "Essential SEO", "Performance Optimization", "2 Weeks Support"],
-      highlight: false,
-      period: "Fixed"
-    },
-    {
-      name: "Growth Package",
-      price: "$3,500",
-      features: ["Full Web Application", "E-commerce Integration", "Advanced Dashboard", "1 Month Support"],
-      highlight: true,
-      period: "Fixed"
-    },
-    {
-      name: "Enterprise Build",
-      price: "Custom",
-      features: ["High-Scale Architecture", "PostgreSQL Optimization", "AWS/Docker Deployment", "Priority 24/7 Support"],
-      highlight: false,
-      period: "Quote"
-    }
-  ];
-
-  return (
-    <section className="pricing-section py-24 bg-primary/5">
-      <div className="container">
-        <div className="text-center mb-16">
-          <span className="text-primary font-bold tracking-widest text-xs uppercase mb-4 block underline underline-offset-8">Investment</span>
-          <h2 className="text-4xl font-extrabold mb-4">Transparent Pricing</h2>
-          <p className="text-muted max-w-xl mx-auto">Scalable solutions for startups and growing businesses. Hourly rate available at <span className="text-primary font-bold">$35–$50/hr</span>.</p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {packages.map((pkg, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ y: -10 }}
-              className={`glass-card p-10 border ${pkg.highlight ? 'border-primary shadow-[0_0_30px_rgba(99,102,241,0.1)]' : 'border-white/10'} relative overflow-hidden`}
-            >
-              {pkg.highlight && <div className="absolute top-0 right-0 bg-primary text-white text-[10px] font-black px-4 py-1 uppercase tracking-widest">Most Popular</div>}
-              <h3 className="text-xl font-bold mb-2">{pkg.name}</h3>
-              <div className="flex items-baseline gap-2 mb-8">
-                <span className="text-4xl font-black text-primary">{pkg.price}</span>
-                <span className="text-xs text-muted font-bold uppercase tracking-widest">{pkg.period}</span>
-              </div>
-              <ul className="space-y-4 mb-10">
-                {pkg.features.map((feat, j) => (
-                  <li key={j} className="flex items-center gap-3 text-sm text-muted">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-              <a href="mailto:abenezer@abenezer.me" className={`btn-pill w-full justify-center ${pkg.highlight ? 'btn-pill-solid' : 'btn-pill-outline'}`}>Get Started</a>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
 export default App;
+
