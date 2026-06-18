@@ -218,7 +218,7 @@ const projectsData = {
     type: 'E-commerce & Logistics',
     tech: ['React', 'Node.js', 'PostgreSQL', 'Socket.io', 'Tailwind CSS', 'Cloud Security'],
     description: 'Lead architect for a multi-vendor ecosystem handling thousands of daily transactions. Implemented real-time inventory tracking, secure payment gateways, and highly optimized database querying structures.',
-    result: 'Handled 5,000+ active clients with 99.9% uptime.',
+    result: 'Handled 80+ active clients with 99.9% uptime.',
     gallery: ['./assets/kudeja-hero-site.png', './assets/kudeja-preview.png'],
     links: { github: 'https://github.com/Abeni-M', live: 'https://kudeja.com' }
   },
@@ -417,7 +417,8 @@ function initPDFExporter() {
             '#scroll-to-top-btn', 
             '#toast-notification',
             '#contact',
-            '.footer-premium'
+            '.footer-premium',
+            '#cert-lightbox-modal'
           ];
           
           elementsToHide.forEach(selector => {
@@ -469,3 +470,89 @@ function initPDFExporter() {
     }
   });
 }
+
+/* ==========================================
+   10. CERTIFICATIONS LIGHTBOX CONTROLLER
+   ========================================== */
+const certsData = {
+  'hikvision-networking': {
+    title: 'Hikvision Spark: Networking',
+    issuer: 'Hikvision',
+    date: 'June 17, 2026',
+    desc: 'Certified completion of the Hikvision Spark Training Program in Networking, focusing on enterprise-grade local network design, configuration, switching, and routing protocols.',
+    img: './assets/certificate.jpg'
+  },
+  'kaspersky-mail': {
+    title: 'Kaspersky Sales Specialist: Security for Mail Server',
+    issuer: 'Kaspersky',
+    date: 'April 24, 2026',
+    desc: 'Certified competence as a Sales Specialist for Kaspersky Security for Mail Server (S36.3), ensuring robust protection for enterprise mail server infrastructures.',
+    img: './assets/photo_2026-06-18_11-34-25.jpg'
+  },
+  'hikvision-cctv': {
+    title: 'Hikvision Spark: CCTV and PA',
+    issuer: 'Hikvision',
+    date: 'May 20, 2026',
+    desc: 'Certified completion of the Hikvision Spark Training Program in CCTV and Public Address (PA) Systems, validating technical expertise in modern video surveillance and public paging systems.',
+    img: './assets/photo_2026-06-18_11-34-31.jpg'
+  },
+  'kaspersky-kuma': {
+    title: 'Kaspersky Sales Specialist: KUMA (SIEM)',
+    issuer: 'Kaspersky',
+    date: 'May 28, 2026',
+    desc: 'Certified Sales Specialist for Kaspersky Unified Monitoring and Analysis Platform (KUMA - S34.3), validating knowledge in security information and event management systems.',
+    img: './assets/photo_2026-06-18_11-34-35.jpg'
+  }
+};
+
+function openCertModal(certId) {
+  const modal = document.getElementById('cert-lightbox-modal');
+  const modalImg = document.getElementById('cert-lightbox-img');
+  const modalTitle = document.getElementById('cert-lightbox-title');
+  const modalDesc = document.getElementById('cert-lightbox-desc');
+  const modalDownload = document.getElementById('cert-lightbox-download');
+  
+  if (!modal || !certsData[certId]) return;
+  
+  const cert = certsData[certId];
+  
+  modalImg.src = cert.img;
+  modalImg.alt = cert.title;
+  modalTitle.textContent = cert.title;
+  modalDesc.textContent = `${cert.issuer} • Issued on ${cert.date} • ${cert.desc}`;
+  modalDownload.href = cert.img;
+  modalDownload.download = `${cert.title.replace(/[^a-zA-Z0-9]/g, '_')}.jpg`;
+  
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden'; // Stop background scroll
+}
+
+function closeCertModal() {
+  const modal = document.getElementById('cert-lightbox-modal');
+  if (modal) {
+    modal.classList.remove('active');
+  }
+  document.body.style.overflow = ''; // Restore background scroll
+}
+
+// Bind modal closing on clicking the backdrop overlay directly
+const certModalOverlay = document.getElementById('cert-lightbox-modal');
+if (certModalOverlay) {
+  certModalOverlay.addEventListener('click', (e) => {
+    if (e.target === certModalOverlay) {
+      closeCertModal();
+    }
+  });
+}
+
+// Bind escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeCertModal();
+    closeProjectModal();
+  }
+});
+
+// Expose modal handlers to global scope for HTML onclick bindings
+window.openCertModal = openCertModal;
+window.closeCertModal = closeCertModal;

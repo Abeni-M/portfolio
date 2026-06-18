@@ -1,6 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Database, Shield, Zap } from 'lucide-react';
+import { Code, Database, Shield, Zap, ShieldCheck } from 'lucide-react';
+import certNet from '../assets/certificate.jpg';
+import certMail from '../assets/photo_2026-06-18_11-34-25.jpg';
+import certCCTV from '../assets/photo_2026-06-18_11-34-31.jpg';
+import certSIEM from '../assets/photo_2026-06-18_11-34-35.jpg';
 
 import './About.css';
 
@@ -9,7 +13,7 @@ const About = () => {
   const serviceList = [
     {
       title: 'Conversion-Focused E-commerce',
-      desc: 'Building marketplaces that handle 5,000+ daily clients with seamless checkout and inventory logic.',
+      desc: 'Building marketplaces that handle 80+ daily clients with seamless checkout and inventory logic.',
       icon: <Zap size={24} />
     },
     {
@@ -83,7 +87,7 @@ const About = () => {
               </p>
               <div className="testimonial-mini glass-card p-6 mt-10 border-l-4 border-primary">
                 <p className="italic text-sm mb-4">
-                  "Kudeja Trading PLC was very happy with the project Abenezer delivered. He handled our ecosystem of 5,000+ clients with exceptional technical skill."
+                  "Kudeja Trading PLC was very happy with the project Abenezer delivered. He handled our ecosystem of 80+ active clients with exceptional technical skill."
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-primary/20 flex-center text-[10px] font-bold">KT</div>
@@ -123,6 +127,10 @@ const About = () => {
               { name: 'Node.js', level: 'Advanced' },
               { name: 'PostgreSQL', level: 'Expert' },
               { name: 'Python', level: 'Intermediate' },
+              { name: 'Network Security', level: 'Certified', certified: true, certBg: certNet },
+              { name: 'Mail Server Security', level: 'Certified', certified: true, certBg: certMail },
+              { name: 'CCTV & PA Systems', level: 'Certified', certified: true, certBg: certCCTV },
+              { name: 'SIEM & Security Ops', level: 'Certified', certified: true, certBg: certSIEM },
               { name: 'Adobe Premiere', level: 'Professional' },
               { name: 'After Effects', level: 'Advanced' },
               { name: 'Docker', level: 'Intermediate' },
@@ -135,10 +143,17 @@ const About = () => {
               <motion.div
                 key={index}
                 whileHover={{ y: -5, scale: 1.05 }}
-                className="tech-card glass-card p-4 text-center border border-white/5 hover:border-primary/30 transition-all"
+                className={`tech-card glass-card p-4 text-center border border-white/5 hover:border-primary/30 transition-all relative overflow-hidden group`}
+                style={tech.certified ? { '--cert-bg': `url(${tech.certBg})` } : {}}
               >
-                <div className="text-sm font-bold mb-1">{tech.name}</div>
-                <div className="text-[10px] text-primary uppercase font-black tracking-widest opacity-60">{tech.level}</div>
+                <div className="text-sm font-bold mb-1 relative z-10">{tech.name}</div>
+                {tech.certified ? (
+                  <div className="text-[10px] text-primary uppercase font-black tracking-widest opacity-80 flex items-center justify-center gap-1 relative z-10">
+                    <ShieldCheck size={12} className="text-primary animate-pulse" /> Certified
+                  </div>
+                ) : (
+                  <div className="text-[10px] text-primary uppercase font-black tracking-widest opacity-60 relative z-10">{tech.level}</div>
+                )}
               </motion.div>
             ))}
           </div>

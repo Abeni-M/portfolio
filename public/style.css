@@ -699,38 +699,8 @@ section {
 }
 
 /* ==========================================
-   10. PRICING & CONTACT INFO
+   10. CONTACT INFO
    ========================================== */
-.pricing-section {
-  position: relative;
-  overflow: hidden;
-}
-
-.pricing-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 30% 70%, rgba(99, 102, 241, 0.03) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-.pricing-section .glass-card {
-  transition: var(--transition-smooth);
-  background: var(--bg-card);
-}
-
-.pricing-section .glass-card:hover {
-  border-color: var(--primary);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  transform: translateY(-10px);
-}
-
-[data-theme='light'] .pricing-section .glass-card:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
 
 .contact-grid-premium {
   display: grid;
@@ -958,6 +928,98 @@ section {
   .projects-grid-premium {
     grid-template-columns: 1fr;
   }
+}
+
+/* ==========================================
+   12b. CERTIFICATIONS & LIGHTBOX STYLE
+   ========================================== */
+.tech-card[style*="--cert-bg"] {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.tech-card[style*="--cert-bg"]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--cert-bg);
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.tech-card[style*="--cert-bg"]:hover::before {
+  opacity: 0.12;
+}
+
+.tech-card[style*="--cert-bg"] > * {
+  position: relative;
+  z-index: 1;
+}
+
+.certifications-premium {
+  position: relative;
+  background: linear-gradient(to bottom, transparent, rgba(var(--primary-rgb), 0.02), transparent);
+}
+
+.cert-card-premium {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: var(--transition-smooth);
+}
+
+.cert-card-premium:hover {
+  border-color: var(--primary);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(var(--primary-rgb), 0.1);
+}
+
+.cert-preview {
+  background: #000;
+  position: relative;
+}
+
+.cert-preview img {
+  opacity: 0.85;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.4s ease;
+}
+
+.cert-card-premium:hover .cert-preview img {
+  transform: scale(1.04);
+  opacity: 1;
+}
+
+.cert-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  transition: opacity 0.4s ease;
+}
+
+.cert-card-premium:hover .cert-overlay {
+  opacity: 1;
+}
+
+/* Lightbox specific tweak */
+#cert-lightbox-modal .modal-container {
+  background: rgba(10, 10, 12, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  max-width: 900px;
+}
+
+[data-theme='light'] #cert-lightbox-modal .modal-container {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
 /* ==========================================

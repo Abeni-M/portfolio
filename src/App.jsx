@@ -5,6 +5,7 @@ import html2canvas from 'html2canvas';
 import ContactForm from './components/ContactForm';
 import About from './components/About';
 import Experience from './components/Experience';
+import Certifications from './components/Certifications';
 import Projects from './components/Projects';
 import ThemeToggle from './components/ThemeToggle';
 import ScrollToTop from './components/ScrollToTop';
@@ -197,7 +198,7 @@ function App() {
 
             <p className="hero-description mb-8 text-muted max-w-xl">
               I help startups and businesses build fast, secure e-commerce ecosystems and 
-              high-performance architectures. <span className="text-primary font-bold">5,000+ clients</span> served through Kudeja Trading PLC.
+              high-performance architectures. <span className="text-primary font-bold">80+ clients</span> served through Kudeja Trading PLC.
             </p>
 
             <div className="social-links-row mb-12 flex flex-wrap gap-4 items-center">
@@ -227,11 +228,11 @@ function App() {
 
             <div className="stats-row flex flex-wrap gap-6">
               <div className="stat-box">
-                <span className="stat-value">5k+</span>
+                <span className="stat-value">50</span>
                 <span className="stat-label">Clients Served</span>
               </div>
               <div className="stat-box">
-                <span className="stat-value">$35/hr</span>
+                <span className="stat-value">$5/hr</span>
                 <span className="stat-label">Starting Rate</span>
               </div>
               <div className="stat-box">
@@ -257,6 +258,14 @@ function App() {
         viewport={{ once: true, margin: "-100px" }}
       >
         <Experience />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        <Certifications />
       </motion.div>
 
       <motion.div

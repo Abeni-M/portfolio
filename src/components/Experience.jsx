@@ -10,7 +10,7 @@ const Experience = () => {
       role: 'Lead Developer & System Administrator',
       company: 'Kudeja Trading PLC',
       location: 'Addis Ababa, Ethiopia',
-      period: 'Jan 2024 - Present',
+      period: 'Jan 2025 - Present',
       description: 'Architecting and managing a high-scale digital marketplace. Developed a seamless client ordering system and multi-vendor ecosystem, focusing on high-concurrency PostgreSQL performance and secure digital infrastructure.',
       skills: ['Marketplace Logic', 'PostgreSQL', 'Node.js', 'React', 'Cloud Security'],
       type: 'Work'

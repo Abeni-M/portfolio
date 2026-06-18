@@ -388,35 +388,5 @@
   }
 }
 
-/* Pricing Section Styles */
-.pricing-section {
-  position: relative;
-  overflow: hidden;
-}
 
-.pricing-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 30% 70%, rgba(99, 102, 241, 0.03) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-.pricing-section .glass-card {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  background: var(--bg-card);
-}
-
-.pricing-section .glass-card:hover {
-  border-color: var(--primary);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  transform: translateY(-10px);
-}
-
-[data-theme='light'] .pricing-section .glass-card:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
 

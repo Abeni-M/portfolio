@@ -15,7 +15,7 @@ const Projects = () => {
       type: 'E-commerce & Logistics',
       tech: ['React', 'Node.js', 'PostgreSQL', 'Socket.io'],
       description: 'Lead architect for a multi-vendor ecosystem handling thousands of daily transactions. Implemented real-time inventory tracking and secure payment gateways.',
-      result: 'Handled 5,000+ active clients with 99.9% uptime.',
+      result: 'Handled 80+ active clients with 99.9% uptime.',
       image: kudejaImg,
       gallery: [kudejaHeroImg, kudejaImg],
       links: { github: 'https://github.com/Abeni-M', live: 'https://kudeja.com' }
